@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+@theme {
+  --color-deli-green: #1B4332;
+  --color-deli-gold: #D4AF37;
+  --color-deli-cream: #FDFBF7;
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-deli-cream text-gray-900 font-sans;
+  }
+  h1, h2, h3 {
+    @apply font-serif;
+  }
+}
