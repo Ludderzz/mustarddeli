@@ -1,5 +1,5 @@
 ﻿import React from 'react';
-import { AnnouncementBar } from './components/AnnouncementBar';
+import { AnnouncementBar } from './components/DealsBar';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { MenuSection } from './components/MenuSection';
