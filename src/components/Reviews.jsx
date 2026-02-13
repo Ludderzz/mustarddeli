@@ -8,8 +8,8 @@ export const ReviewsSection = () => {
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
-      // Dynamically calculate the width of the visible container
-      // This ensures it scrolls exactly 1 slide on mobile and desktop
+      // By using offsetWidth, we jump exactly one "view" per click.
+      // This works perfectly for the 89vw cards on mobile.
       const scrollAmount = current.offsetWidth; 
       
       current.scrollBy({ 
@@ -23,30 +23,30 @@ export const ReviewsSection = () => {
     <section className="py-24 bg-white">
       <div className="container mx-auto px-6">
         
-        {/* Header Logic */}
+        {/* Header Section */}
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="max-w-xl">
             <div className="flex items-center gap-3 mb-4">
               <div className="h-px w-8 bg-deli-mustard" />
               <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[10px]">Guest Books</span>
             </div>
-            <h2 className="text-5xl md:text-6xl font-serif text-deli-blue italic">
+            <h2 className="text-5xl md:text-6xl font-serif text-deli-blue italic leading-tight">
               Kind <span className="text-deli-mustard italic font-bold tracking-tight">Words</span>
             </h2>
           </div>
 
-          {/* Navigation */}
+          {/* Slider Controls */}
           <div className="flex gap-4">
             <button 
               onClick={() => scroll('left')}
-              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-blue hover:text-white transition-all duration-300 shadow-sm"
+              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-blue hover:text-white transition-all duration-300 shadow-sm active:scale-90"
               aria-label="Previous review"
             >
               <ChevronLeft size={20} />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-blue hover:text-white transition-all duration-300 shadow-sm"
+              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-blue hover:text-white transition-all duration-300 shadow-sm active:scale-90"
               aria-label="Next review"
             >
               <ChevronRight size={20} />
@@ -54,7 +54,7 @@ export const ReviewsSection = () => {
           </div>
         </div>
 
-        {/* Scrollable Container */}
+        {/* The Carousel */}
         <div 
           ref={scrollRef}
           className="flex gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-8"
@@ -73,11 +73,11 @@ export const ReviewsSection = () => {
               </div>
 
               <div className="flex items-center justify-between mt-auto pt-6 border-t border-slate-200/50">
-                <div>
+                <div className="flex flex-col gap-1">
                   <h4 className="font-bold text-deli-blue text-xs uppercase tracking-[0.2em]">
                     {review.author}
                   </h4>
-                  <div className="flex gap-0.5 mt-1">
+                  <div className="flex gap-0.5">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} size={10} fill="#E2B13C" className="text-deli-mustard" />
                     ))}
@@ -93,6 +93,7 @@ export const ReviewsSection = () => {
         </div>
       </div>
 
+      {/* Hide Scrollbars globally for this section */}
       <style dangerouslySetInnerHTML={{ __html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
       `}} />
