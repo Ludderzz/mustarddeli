@@ -1,0 +1,170 @@
+[
+  {
+    "id": 1,
+    "author": "Milen Grigorov",
+    "rating": 5,
+    "comment": "Lovely Cafe in the heart of beautiful Clevedon. Excellent customer service. Strongly recommend.",
+    "tag": "General"
+  },
+  {
+    "id": 2,
+    "author": "John Vickerstaff",
+    "rating": 5,
+    "comment": "Definitely the best Ham & Cheese toasted Ciabattas in town! 👍",
+    "tag": "Food"
+  },
+  {
+    "id": 3,
+    "author": "Nina Mayler",
+    "rating": 5,
+    "comment": "Absolutely lovely cafe in Clevedon. Delicious food, lovely atmosphere and wonderful health-conscious products. We’ll be back!",
+    "tag": "Atmosphere"
+  },
+  {
+    "id": 4,
+    "author": "Clare Neale",
+    "rating": 5,
+    "comment": "Fantastic cafe! Beautiful coffee. Nice venue to sit and do a few hours work with great coffee and very yummy pancakes.",
+    "tag": "Atmosphere"
+  },
+  {
+    "id": 5,
+    "author": "Alison Newman",
+    "rating": 5,
+    "comment": "A wonderful experience, lovely friendly staff, very helpful. The cakes are delicious and the coffee is lovely.",
+    "tag": "Bakery"
+  },
+  {
+    "id": 6,
+    "author": "George Harris",
+    "rating": 5,
+    "comment": "The goats cheese and onion ciabatta was very tasty indeed. Very friendly service and a nice atmosphere.",
+    "tag": "Food"
+  },
+  {
+    "id": 7,
+    "author": "Jane Baker",
+    "rating": 5,
+    "comment": "Lovely owner with delicious, homemade food! Fantastic independent cafe, would recommend.",
+    "tag": "Service"
+  },
+  {
+    "id": 8,
+    "author": "Sheena Clowater",
+    "rating": 5,
+    "comment": "Delicious, fresh sandwiches at a great price and served with a smile!",
+    "tag": "Food"
+  },
+  {
+    "id": 9,
+    "author": "Val Phillips",
+    "rating": 5,
+    "comment": "The food was delicious and well presented. Laura helped steer me in the right direction to include guests with various diets. Everyone commented on the buffet!",
+    "tag": "Catering"
+  },
+  {
+    "id": 10,
+    "author": "Chris Horseman",
+    "rating": 5,
+    "comment": "Warmly welcomed. Lovely coffee where you could taste the different notes of hazelnut and chocolate. Made with passion.",
+    "tag": "Coffee"
+  },
+  {
+    "id": 11,
+    "author": "Vince Brown",
+    "rating": 5,
+    "comment": "We have been using Mustard for office lunches for nearly 2 years. The quality of the food is excellent and delivery is punctual.",
+    "tag": "Catering"
+  },
+  {
+    "id": 12,
+    "author": "Andrew Jones",
+    "rating": 5,
+    "comment": "Great gluten-free carrot cake, washed down with a banana milkshake. The coffee smells divine!",
+    "tag": "Dietary"
+  },
+  {
+    "id": 13,
+    "author": "Bob Chivers",
+    "rating": 5,
+    "comment": "What a lovely place! Great coffee, and the cake... Wow!",
+    "tag": "Bakery"
+  },
+  {
+    "id": 14,
+    "author": "Valerie Nash",
+    "rating": 5,
+    "comment": "Lovely food and coffee. Owners could not have been friendlier—they even offered a top-up of hot milk to my coffee.",
+    "tag": "Service"
+  },
+  {
+    "id": 15,
+    "author": "Gemma Hein",
+    "rating": 5,
+    "comment": "Laura is the best chef and coffee maker. Perfect teas too!",
+    "tag": "Service"
+  },
+  {
+    "id": 16,
+    "author": "Dovilė Arlauskaitė",
+    "rating": 5,
+    "comment": "Please do yourself a favour and get a piece of the tahini brownie. It was the tastiest thing I’ve eaten in a long time!",
+    "tag": "Bakery"
+  },
+  {
+    "id": 17,
+    "author": "Heather Sharrock",
+    "rating": 5,
+    "comment": "Lovely local deli with excellent food and great coffee!",
+    "tag": "Deli"
+  },
+  {
+    "id": 18,
+    "author": "Jeanette Moore",
+    "rating": 5,
+    "comment": "A gorgeous cafe. Lovely owner, homemade food and perfect coffee. A real treat for lunch.",
+    "tag": "Lunch"
+  },
+  {
+    "id": 19,
+    "author": "Judith Phipps",
+    "rating": 5,
+    "comment": "What a gem of a place! Impressed with the delicious, healthy food and friendly service. The coffee was amazing!",
+    "tag": "Food"
+  },
+  {
+    "id": 20,
+    "author": "Gary Viner",
+    "rating": 5,
+    "comment": "Quite the most delicious bacon bap we have enjoyed for a long, long time. Will be back soon!",
+    "tag": "Food"
+  },
+  {
+    "id": 21,
+    "author": "Louise W",
+    "rating": 5,
+    "comment": "Definitely one of the nicest bacon & egg rolls I’ve had! Good quality ingredients and crispy bacon!",
+    "tag": "Food"
+  },
+  {
+    "id": 22,
+    "author": "Helen Papworth",
+    "rating": 5,
+    "comment": "The coffee really is good! The salads and savouries looked very tempting. Excellent cake selection as well.",
+    "tag": "Deli"
+  },
+  {
+    "id": 23,
+    "author": "Cathy Fuller",
+    "rating": 5,
+    "comment": "A wonderful vegan lemon cake baked for our grandson's birthday. Delicious! Thank you!",
+    "tag": "Dietary"
+  },
+  {
+    "id": 24,
+    "author": "Mark Stroud",
+    "rating": 5,
+    "comment": "Mustard catered for my birthday. The food was excellent and we received lots of positive comments from our guests.",
+    "tag": "Catering"
+  }
+]

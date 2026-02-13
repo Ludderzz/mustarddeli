@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-deli-green: #1B4332;
-  --color-deli-gold: #D4AF37;
-  --color-deli-cream: #FDFBF7;
+  /* Brand Colors */
+  --color-deli-mustard: #c8a011;  /* Your Yellow */
+  --color-deli-blue: #465d6a;     /* Your Blue */
+  --color-deli-grey: #f0ede6;     /* Your Grey */
   
+  /* Modern Neutral mapping */
+  --color-deli-cream: var(--color-deli-grey); 
+  --color-deli-gold: var(--color-deli-mustard);
+
   --font-serif: "Playfair Display", serif;
   --font-sans: "Inter", sans-serif;
 }
