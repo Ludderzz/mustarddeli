@@ -8,8 +8,7 @@ export const ReviewsSection = () => {
   const scroll = (direction) => {
     const { current } = scrollRef;
     if (current) {
-      // By using offsetWidth, we jump exactly one "view" per click.
-      // This works perfectly for the 89vw cards on mobile.
+      // offsetWidth ensures we jump exactly one full container width per click
       const scrollAmount = current.offsetWidth; 
       
       current.scrollBy({ 
@@ -57,13 +56,18 @@ export const ReviewsSection = () => {
         {/* The Carousel */}
         <div 
           ref={scrollRef}
-          className="flex gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-8"
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          className="flex gap-4 md:gap-8 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-8 px-6 -mx-6"
+          style={{ 
+            scrollbarWidth: 'none', 
+            msOverflowStyle: 'none',
+            scrollPaddingLeft: '1.5rem', /* Ensures the first card aligns with the header on snap */
+            scrollPaddingRight: '1.5rem'
+          }}
         >
           {reviewsData.map((review) => (
             <div 
               key={review.id} 
-              className="min-w-[89vw] md:min-w-[450px] snap-center bg-deli-grey/40 p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between border border-transparent hover:border-deli-mustard/20 transition-all duration-500"
+              className="min-w-[85vw] md:min-w-[450px] snap-start md:snap-center bg-deli-grey/40 p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between border border-transparent hover:border-deli-mustard/20 transition-all duration-500"
             >
               <div>
                 <Quote className="text-deli-mustard mb-6 opacity-30" size={32} />
@@ -93,7 +97,6 @@ export const ReviewsSection = () => {
         </div>
       </div>
 
-      {/* Hide Scrollbars globally for this section */}
       <style dangerouslySetInnerHTML={{ __html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
       `}} />
