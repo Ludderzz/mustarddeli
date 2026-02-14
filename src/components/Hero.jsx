@@ -57,20 +57,18 @@ export const Hero = ({ setView }) => {
               Freshly <span className="italic text-deli-mustard font-normal">prepared</span>
             </span>
             <br />
-            {/* The Squiggle Section */}
+            {/* Handmade & Straight Line Section */}
             <span className="whitespace-nowrap italic text-deli-mustard font-normal">
-              Homemade{' '}
-              <span className="relative inline-block px-1">
+              Handmade{' '}
+              <span className="relative inline-block px-1 text-white not-italic">
                 daily
-                {/* Mustard Squeeze Squiggle SVG */}
-                <svg className="absolute -bottom-3 md:-bottom-5 left-0 w-full h-4 md:h-8" viewBox="0 0 100 20" preserveAspectRatio="none">
-                  <path 
-                    d="M0,10 Q10,0 20,10 T40,10 T60,10 T80,10 T100,10" 
-                    fill="transparent" 
-                    stroke="#E2B13C" /* Match your deli-mustard color */
+                {/* Straight Line SVG */}
+                <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-1 md:h-2" viewBox="0 0 100 10" preserveAspectRatio="none">
+                  <line 
+                    x1="0" y1="5" x2="100" y2="5"
+                    stroke="#E2B13C" /* Deli-mustard gold */
                     strokeWidth="4" 
                     strokeLinecap="round"
-                    className="animate-dash"
                   />
                 </svg>
               </span>
