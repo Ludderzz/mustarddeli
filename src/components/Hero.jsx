@@ -1,19 +1,44 @@
-﻿import React from 'react';
-import backgroundImage from '../assets/background.jpg';
+﻿import React, { useState, useEffect } from 'react';
+
+// Actual imports
+import SecondHero from '../assets/secondheropic.jpeg';
+import Background from '../assets/background.jpg';
+import ThirdMaybe from '../assets/thirdmaybe.jpeg';
 
 export const Hero = ({ setView }) => {
+  const [currentImage, setCurrentImage] = useState(0);
+  
+  const images = [SecondHero, Background, ThirdMaybe];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % images.length);
+    }, 5000); 
+    return () => clearInterval(timer);
+  }, [images.length]);
+
   return (
-    <section className="relative min-h-svh w-full flex items-center justify-center overflow-hidden py-20">
+    <section className="relative min-h-svh w-full flex items-center justify-center overflow-hidden pt-32 pb-20 bg-deli-blue">
       
-      {/* 1. The Background */}
+      {/* 1. Animated Slideshow Background */}
       <div className="absolute inset-0 z-0">
-        <img 
-          src={backgroundImage} 
-          alt="Artisan Bread and Deli" 
-          className="w-full h-full object-cover animate-ken-burns" 
-        />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="absolute inset-0 bg-gradient-to-b from-deli-blue/70 via-transparent to-deli-blue/90" />
+        {images.map((img, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentImage ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <img 
+              src={img} 
+              alt={`Mustard Cafe Background ${index + 1}`} 
+              className="w-full h-full object-cover object-top scale-105 animate-ken-burns" 
+            />
+          </div>
+        ))}
+        
+        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-b from-deli-blue/40 via-transparent to-deli-blue/80" />
       </div>
 
       {/* 2. The Content */}
@@ -26,18 +51,34 @@ export const Hero = ({ setView }) => {
             <span className="text-white text-[10px] md:text-xs font-bold uppercase tracking-[0.2em]">Mustard cafe & deli</span>
           </div>
 
-          {/* Main Heading - "Freshly Prepared" stays on one line */}
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white leading-[1.1] mb-6 drop-shadow-lg">
+          {/* Main Heading */}
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-9xl font-serif text-white leading-[1.1] mb-6 drop-shadow-lg mt-4">
             <span className="whitespace-nowrap">
-              Freshly <span className="italic text-deli-mustard font-normal">Prepared</span>
+              Freshly <span className="italic text-deli-mustard font-normal">prepared</span>
             </span>
             <br />
-            <span className="italic text-deli-mustard font-normal">homemade</span>{' '}
-            <span className="underline decoration-deli-mustard/40 underline-offset-8 md:underline-offset-12">daily</span>
+            {/* The Squiggle Section */}
+            <span className="whitespace-nowrap italic text-deli-mustard font-normal">
+              Homemade{' '}
+              <span className="relative inline-block px-1">
+                daily
+                {/* Mustard Squeeze Squiggle SVG */}
+                <svg className="absolute -bottom-3 md:-bottom-5 left-0 w-full h-4 md:h-8" viewBox="0 0 100 20" preserveAspectRatio="none">
+                  <path 
+                    d="M0,10 Q10,0 20,10 T40,10 T60,10 T80,10 T100,10" 
+                    fill="transparent" 
+                    stroke="#E2B13C" /* Match your deli-mustard color */
+                    strokeWidth="4" 
+                    strokeLinecap="round"
+                    className="animate-dash"
+                  />
+                </svg>
+              </span>
+            </span>
           </h1>
 
           <p className="text-base sm:text-lg md:text-2xl text-deli-grey font-light max-w-xl mx-auto mb-10 md:mb-12 leading-relaxed px-4">
-            The heart of Clevedon’s food scene. Specialty coffee, 
+            The heart of Clevedon’s food scene. Speciality coffee, 
             artisan deli goods, and bespoke catering.
           </p>
 
@@ -58,10 +99,21 @@ export const Hero = ({ setView }) => {
               Catering Inquiry
             </button>
           </div>
+
+          {/* Slide Indicators */}
+          <div className="flex justify-center gap-2 mt-12">
+            {images.map((_, i) => (
+              <div 
+                key={i}
+                className={`h-1 transition-all duration-500 rounded-full ${
+                  i === currentImage ? 'w-8 bg-deli-mustard' : 'w-2 bg-white/30'
+                }`}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* 3. Bottom Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:block opacity-30">
         <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
       </div>
