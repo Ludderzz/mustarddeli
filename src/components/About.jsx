@@ -11,18 +11,15 @@ const aboutData = {
   values: [
     {
       name: "The Deli Counter",
-      desc: "From award-winning local cheeses to premium cured meats and our signature deli-made savouries, we curate the best of the West Country.",
-      icon: "🧀"
+      desc: "From award-winning local cheeses to premium cured meats and our signature deli-made savouries, we curate the best of the West Country."
     },
     {
       name: "Freshly Prepared",
-      desc: "Our daily salads and lunches are crafted on-site using seasonal produce, ensuring every bite is as fresh as the morning's delivery.",
-      icon: "🥗"
+      desc: "Our daily salads and lunches are crafted on-site using seasonal produce, ensuring every bite is as fresh as the morning's delivery."
     },
     {
       name: "Eat-in or Away",
-      desc: "Join us at the counter for a coffee and a slice of cake, or grab a wholesome lunch to go. Great food, wherever you choose to enjoy it.",
-      icon: "🥡"
+      desc: "Join us at the counter for a coffee and a slice of cake, or grab a wholesome lunch to go. Great food, wherever you choose to enjoy it."
     }
   ]
 };
@@ -45,9 +42,11 @@ export const AboutSection = () => {
               <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[10px]">The Deli Story</span>
             </div>
             
-            {/* Updated Headline with Font Swap */}
-            <h2 className="text-5xl md:text-7xl font-sans text-deli-blue leading-[1.1] font-bold tracking-tight">
-              Passionate <span className="font-serif italic font-normal text-deli-mustard">about</span> food.
+            {/* HEADLINE: Switched logic as requested */}
+            <h2 className="text-5xl md:text-7xl font-serif text-deli-blue leading-[1.1]">
+              <span className="not-italic font-bold tracking-tight">Passionate</span>{' '}
+              <span className="italic text-deli-mustard font-normal">about</span>{' '}
+              <span className="not-italic font-bold tracking-tight">food</span>.
             </h2>
             
             <p className="text-slate-600 font-light text-lg leading-relaxed">
@@ -72,7 +71,6 @@ export const AboutSection = () => {
         <div className="grid md:grid-cols-3 gap-12">
           {aboutData.values.map((value, index) => (
             <div key={index} className="group p-8 rounded-2xl bg-white/50 border border-transparent hover:border-deli-mustard/20 hover:bg-white transition-all duration-500 shadow-sm hover:shadow-xl">
-              <div className="text-4xl mb-6">{value.icon}</div>
               <h3 className="text-2xl font-serif text-deli-blue mb-4 group-hover:text-deli-mustard transition-colors">
                 {value.name}
               </h3>
