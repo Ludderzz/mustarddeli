@@ -44,7 +44,7 @@ export const CateringPage = () => {
   };
 
   return (
-    <div className="pt-24 md:pt-40 pb-24 min-h-screen bg-deli-grey relative">
+    <div className="pt-10 md:pt-10 pb-24 min-h-screen bg-deli-grey relative">
       {/* 1. Header Section */}
       <header className="container mx-auto px-6 mb-16 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">

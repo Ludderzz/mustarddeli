@@ -24,7 +24,7 @@ export const DeliPage = () => {
   };
 
   return (
-    <div className="pt-32 md:pt-40 pb-24 min-h-screen bg-deli-grey relative">
+    <div className="pt-10 md:pt-10 pb-24 min-h-screen bg-deli-grey relative">
       {/* 1. Deli Hero Header */}
       <header className="container mx-auto px-6 mb-20 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">

@@ -30,7 +30,7 @@ export const CafePage = () => {
   };
 
   return (
-    <div className="pt-24 md:pt-40 pb-24 min-h-screen bg-deli-grey relative">
+    <div className="pt-10 md:pt-10 pb-24 min-h-screen bg-deli-grey relative">
       {/* 1. Hero Header */}
       <header className="container mx-auto px-6 mb-12 md:mb-20 text-center">
         <div className="flex items-center justify-center gap-3 mb-4 md:mb-6">
