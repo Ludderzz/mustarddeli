@@ -62,12 +62,16 @@ export const Hero = ({ setView }) => {
               Handmade{' '}
               <span className="relative inline-block px-1 text-white not-italic">
                 daily
-                {/* Straight Line SVG */}
-                <svg className="absolute -bottom-1 md:-bottom-2 left-0 w-full h-1 md:h-2" viewBox="0 0 100 10" preserveAspectRatio="none">
+                {/* Straight Line SVG - Adjusted for size and position */}
+                <svg 
+                  className="absolute -bottom-2 md:-bottom-4 left-0 w-full h-2 md:h-4" 
+                  viewBox="0 0 100 10" 
+                  preserveAspectRatio="none"
+                >
                   <line 
                     x1="0" y1="5" x2="100" y2="5"
                     stroke="#E2B13C" /* Deli-mustard gold */
-                    strokeWidth="4" 
+                    strokeWidth="4" /* Bigger line thickness */
                     strokeLinecap="round"
                   />
                 </svg>
