@@ -1,32 +1,33 @@
 ﻿import React from 'react';
+// Import your local image
+import shopFront from '../assets/shopfront.jpg';
 
 const aboutData = {
   heritage: {
     title: "Our Clevedon Roots",
-    description: "Founded on the belief that great food shouldn't be complicated. We spend our mornings sourcing from North Somerset farmers and artisan producers.",
+    description: "Mustard is your local destination for the finest cheeses, meats, and artisan bread. We specialize in deli-made savouries, fresh salads, and handmade cakes—perfect for a relaxed lunch in our café or to takeaway for your own table.",
     stats: [
       { label: "Local Partners", value: "12+" },
       { label: "Years in Clevedon", value: "15" },
       { label: "Daily Bakes", value: "100%" }
     ],
-    // Updated image to a higher-end deli interior feel
-    image: "https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=1000&auto=format&fit=crop"
+    image: shopFront
   },
   values: [
     {
-      name: "Artisanal Integrity",
-      desc: "Every loaf is hand-kneaded and every preserve is small-batch. We don't believe in shortcuts.",
-      icon: "🌾"
+      name: "The Deli Counter",
+      desc: "From award-winning local cheeses to premium cured meats and our signature deli-made savouries, we curate the best of the West Country.",
+      icon: "🧀"
     },
     {
-      name: "Sustainably Sourced",
-      desc: "Our carbon footprint matters. 90% of our produce travels less than 30 miles to reach your plate.",
-      icon: "🌍"
+      name: "Freshly Prepared",
+      desc: "Our daily salads and lunches are crafted on-site using seasonal produce, ensuring every bite is as fresh as the morning's delivery.",
+      icon: "🥗"
     },
     {
-      name: "Community First",
-      desc: "More than a deli, we're a hub for Clevedon creatives, coffee lovers, and foodies alike.",
-      icon: "🤝"
+      name: "Eat-in or Away",
+      desc: "Join us at the counter for a coffee and a slice of cake, or grab a wholesome lunch to go. Great food, wherever you choose to enjoy it.",
+      icon: "🥡"
     }
   ]
 };
@@ -34,7 +35,7 @@ const aboutData = {
 export const AboutSection = () => {
   return (
     <section id="about" className="py-24 md:py-32 bg-deli-grey relative overflow-hidden">
-      {/* Subtle Background Pattern - Using the Grey palette */}
+      {/* Subtle Background Pattern */}
       <div className="absolute inset-0 opacity-[0.4] pointer-events-none mix-blend-multiply" 
            style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/pinstripe.png")` }} />
 
@@ -50,7 +51,7 @@ export const AboutSection = () => {
             </div>
             
             <h2 className="text-5xl md:text-7xl font-serif text-deli-blue italic leading-[1.1]">
-              Crafting <span className="text-slate-900 not-italic font-bold tracking-tight">Tradition</span> Daily.
+              Crafting <span className="text-deli-mustard not-italic font-bold tracking-tight">Tradition</span> Daily.
             </h2>
             
             <p className="text-slate-600 font-light text-lg leading-relaxed">
@@ -68,13 +69,12 @@ export const AboutSection = () => {
           </div>
 
           <div className="lg:col-span-7 relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-video md:aspect-square lg:aspect-video border-8 border-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-white p-1 inline-block w-full">
               <img 
                 src={aboutData.heritage.image} 
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-1000"
-                alt="Our Deli Interior"
+                className="w-full h-auto rounded-xl object-cover" 
+                alt="Mustard Deli Shop Front"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-deli-blue/40 to-transparent" />
             </div>
             {/* Decorative Mustard Frame Offset */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-r-2 border-b-2 border-deli-mustard z-0 hidden md:block" />
@@ -96,10 +96,9 @@ export const AboutSection = () => {
           ))}
         </div>
 
-        {/* 3. The CTA Block - Now using the Deli Blue */}
+        {/* 3. The CTA Block */}
         <div className="mt-32">
           <div className="bg-deli-blue rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden shadow-2xl shadow-deli-blue/20">
-            {/* Background Graphic */}
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
                <span className="font-serif italic text-[200px] text-white select-none">M</span>
             </div>

@@ -8,6 +8,7 @@ import { DeliPage } from './pages/DeliPage';
 import { CateringPage } from './pages/CateringPage';
 import { InfoSection } from './components/InfoSection'; 
 import { ReviewsSection } from './components/Reviews';
+import { Gallery } from './components/Gallary';
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -56,6 +57,7 @@ function App() {
           <>
             <Hero setView={setCurrentView} />
             <AboutSection />
+            <Gallery />
             <ReviewsSection />
           </>
         )}
