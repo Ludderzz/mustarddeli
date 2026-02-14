@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { X } from 'lucide-react';
 
 // IMPORT ALL IMAGES
-import shopFront from '../assets/shop-front.jpg';
+import shopFront from '../assets/shopfront.jpg';
 import food1 from '../assets/food1.jpg'; // Spinach & Tomato Rolls
 import food2 from '../assets/food2.jpg'; // Mini Yorkshires
 import food3 from '../assets/food3.jpg'; // Traditional Sausage Rolls
