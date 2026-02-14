@@ -6,11 +6,6 @@ const aboutData = {
   heritage: {
     title: "Our Clevedon Roots",
     description: "Mustard is your local destination for the finest cheeses, meats, and artisan bread. We specialize in deli-made savouries, fresh salads, and handmade cakes—perfect for a relaxed lunch in our café or to takeaway for your own table.",
-    stats: [
-      { label: "Local Partners", value: "12+" },
-      { label: "Years in Clevedon", value: "15" },
-      { label: "Daily Bakes", value: "100%" }
-    ],
     image: shopFront
   },
   values: [
@@ -41,7 +36,7 @@ export const AboutSection = () => {
 
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         
-        {/* 1. Heritage & Stats */}
+        {/* 1. Heritage Content */}
         <div className="grid lg:grid-cols-12 gap-16 items-center mb-32">
           
           <div className="lg:col-span-5 space-y-8">
@@ -50,22 +45,14 @@ export const AboutSection = () => {
               <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[10px]">The Deli Story</span>
             </div>
             
-            <h2 className="text-5xl md:text-7xl font-serif text-deli-blue italic leading-[1.1]">
-              Crafting <span className="text-deli-mustard not-italic font-bold tracking-tight">Tradition</span> Daily.
+            {/* Updated Headline with Font Swap */}
+            <h2 className="text-5xl md:text-7xl font-sans text-deli-blue leading-[1.1] font-bold tracking-tight">
+              Passionate <span className="font-serif italic font-normal text-deli-mustard">about</span> food.
             </h2>
             
             <p className="text-slate-600 font-light text-lg leading-relaxed">
               {aboutData.heritage.description}
             </p>
-
-            <div className="grid grid-cols-3 gap-8 pt-6 border-t border-deli-blue/10">
-              {aboutData.heritage.stats.map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <p className="text-3xl font-serif text-deli-blue">{stat.value}</p>
-                  <p className="text-[10px] uppercase font-bold text-slate-400 tracking-widest">{stat.label}</p>
-                </div>
-              ))}
-            </div>
           </div>
 
           <div className="lg:col-span-7 relative">
@@ -100,7 +87,7 @@ export const AboutSection = () => {
         <div className="mt-32">
           <div className="bg-deli-blue rounded-[2.5rem] p-8 md:p-16 relative overflow-hidden shadow-2xl shadow-deli-blue/20">
             <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-               <span className="font-serif italic text-[200px] text-white select-none">M</span>
+                <span className="font-serif italic text-[200px] text-white select-none">M</span>
             </div>
             
             <div className="flex flex-col lg:flex-row items-center justify-between gap-12 relative z-10">
