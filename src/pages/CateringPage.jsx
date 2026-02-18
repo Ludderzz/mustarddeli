@@ -44,7 +44,7 @@ export const CateringPage = () => {
   };
 
   return (
-    <div className="pt-10 md:pt-10 pb-24 min-h-screen bg-deli-grey relative">
+    <div className="pt-10 pb-24 min-h-screen bg-white relative">
       {/* 1. Header Section */}
       <header className="container mx-auto px-6 mb-16 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
@@ -56,39 +56,35 @@ export const CateringPage = () => {
           Bespoke <span className="text-slate-900 not-italic font-bold">Catering</span>
         </h1>
         <p className="max-w-2xl mx-auto text-slate-500 font-light italic text-lg">
-          From corporate lunches to intimate garden parties, we bring the best of our deli to your doorstep.
+          Artisan platters and curated menus delivered to your event.
         </p>
       </header>
 
-      {/* 2. Service Highlights */}
-      <section className="container mx-auto px-6 mb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* 2. Service Highlights (Slimmer Design) */}
+      <section className="container mx-auto px-6 mb-24 max-w-5xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
-            { icon: <Users size={24} />, title: "Corporate", desc: "Impress your team with artisan platters and fresh salads." },
-            { icon: <Calendar size={24} />, title: "Private Events", desc: "Perfect for birthdays, anniversaries, and family wakes." },
-            { icon: <Utensils size={24} />, title: "Grazing Tables", desc: "A stunning visual feast of cheeses, meats, and fruits." }
+            { icon: <Users size={20} />, title: "Corporate", desc: "Artisan platters for the office." },
+            { icon: <Calendar size={20} />, title: "Private Events", desc: "Birthdays and family gatherings." },
+            { icon: <Utensils size={20} />, title: "Grazing Tables", desc: "Stunning visual feasts." }
           ].map((service, i) => (
-            <div key={i} className="p-8 rounded-[2rem] bg-white border border-slate-100 flex flex-col items-center text-center group hover:bg-deli-blue transition-all duration-500 shadow-sm hover:shadow-xl">
-              <div className="w-12 h-12 bg-deli-grey rounded-2xl flex items-center justify-center text-deli-blue mb-6 group-hover:bg-white group-hover:rotate-12 transition-all">
-                {service.icon}
-              </div>
-              <h3 className="text-xl font-serif font-bold text-deli-blue mb-3 group-hover:text-white">{service.title}</h3>
-              <p className="text-slate-500 text-sm leading-relaxed group-hover:text-white/80">{service.desc}</p>
+            <div key={i} className="flex flex-col items-center text-center">
+              <div className="text-deli-mustard mb-4">{service.icon}</div>
+              <h3 className="text-lg font-serif font-bold text-deli-blue mb-2">{service.title}</h3>
+              <p className="text-slate-400 text-xs leading-relaxed">{service.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* 3. Catering Menu Grid */}
-      <main className="container mx-auto px-6 max-w-6xl">
-        <h2 className="text-2xl font-serif text-deli-blue italic mb-10 flex items-center gap-4">
-          Our Catering Packages <div className="h-px flex-1 bg-deli-blue/10" />
-        </h2>
+      {/* 3. Fancy Catering List */}
+      <main className="container mx-auto px-6 max-w-4xl">
+        <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-300 mb-12 text-center">Available Packages</h2>
 
         {loading ? (
           <div className="text-center py-20 font-serif italic text-deli-blue animate-pulse">Preparing menus...</div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="space-y-12">
             {menuItems.map((item) => (
               <div 
                 key={item.id} 
@@ -96,29 +92,31 @@ export const CateringPage = () => {
                     setSelectedItem(item);
                     setGuestCount(10);
                 }}
-                className="group cursor-pointer bg-white rounded-[2rem] overflow-hidden border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-500"
+                className="group cursor-pointer relative"
               >
-                <div className="h-56 overflow-hidden relative">
-                  {item.image_url ? (
-                    <img src={item.image_url} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={item.name} />
-                  ) : (
-                    <div className="w-full h-full bg-deli-blue/5 flex items-center justify-center text-deli-blue/20">
-                      <Utensils size={48} />
-                    </div>
-                  )}
-                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl shadow-lg border border-slate-100 flex flex-col items-center">
-                    <span className="text-deli-blue font-bold text-base font-serif leading-none">
-                        {item.price ? `£${formatPrice(item.price)}` : 'P.O.A'}
+                {/* Header: Name ..... Price */}
+                <div className="flex items-end gap-2 mb-1">
+                  <h3 className="text-xl md:text-2xl font-serif text-deli-blue group-hover:text-deli-mustard transition-colors leading-none flex-shrink-0">
+                    {item.name}
+                  </h3>
+                  
+                  <div className="flex-1 border-b-2 border-dotted border-slate-200 mb-1.5 opacity-50" />
+                  
+                  <div className="flex-shrink-0 text-right leading-none">
+                    <span className="font-serif text-deli-blue font-bold text-xl">
+                      {item.price ? `£${formatPrice(item.price)}` : 'P.O.A'}
                     </span>
-                    <span className="text-[8px] uppercase tracking-tighter font-bold text-slate-400 mt-0.5">per head</span>
+                    <span className="block text-[8px] uppercase font-bold text-slate-400 mt-1">per head</span>
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <h3 className="text-xl font-serif font-bold text-deli-blue mb-2 group-hover:text-deli-mustard transition-colors">{item.name}</h3>
-                  <p className="text-slate-500 text-sm italic font-light line-clamp-2 mb-4">{item.description}</p>
-                  <div className="flex items-center text-deli-mustard text-[10px] font-bold uppercase tracking-widest group-hover:gap-2 transition-all">
-                    View Details & Estimate <ArrowRight size={14} className="ml-1" />
+                {/* Description & Action */}
+                <div className="max-w-2xl flex justify-between items-end">
+                  <p className="text-slate-500 font-light text-sm md:text-base italic leading-relaxed">
+                    {item.description}
+                  </p>
+                  <div className="text-deli-mustard opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap ml-4">
+                    <ArrowRight size={18} />
                   </div>
                 </div>
               </div>
@@ -127,30 +125,30 @@ export const CateringPage = () => {
         )}
       </main>
 
-      {/* 5. MODAL WITH INTERACTIVE ESTIMATOR */}
+      {/* 4. MODAL WITH INTERACTIVE ESTIMATOR */}
       {selectedItem && (
-        <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
-          <div className="absolute inset-0 bg-deli-blue/80 backdrop-blur-sm" onClick={() => setSelectedItem(null)} />
-          <div className="relative bg-white w-full max-w-xl rounded-t-[2.5rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl animate-in slide-in-from-bottom md:zoom-in-95 duration-300 flex flex-col max-h-[95vh]">
+        <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onClick={() => setSelectedItem(null)} />
+          <div className="relative bg-white w-full max-w-xl rounded-[2.5rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300">
             
-            <div className="p-8 md:p-10 overflow-y-auto">
-              <div className="flex justify-between items-start mb-6">
+            <div className="p-8 md:p-12">
+              <div className="flex justify-between items-start mb-8">
                 <div>
-                   <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px] mb-2 block">Catering Package</span>
+                   <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px] mb-2 block">Catering Estimate</span>
                    <h2 className="text-3xl md:text-4xl font-serif text-deli-blue italic leading-tight">{selectedItem.name}</h2>
                 </div>
-                <button onClick={() => setSelectedItem(null)} className="p-2 hover:bg-deli-grey rounded-full transition-colors text-deli-blue"><X size={24} /></button>
+                <button onClick={() => setSelectedItem(null)} className="p-2 text-slate-400 hover:text-deli-blue transition-colors"><X size={24} /></button>
               </div>
               
-              {/* ESTIMATOR CARD */}
-              <div className="bg-deli-grey/50 border border-deli-blue/5 rounded-[2rem] p-6 mb-6">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                    <div className="flex-1">
-                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-3 tracking-widest">Number of Guests</p>
-                        <div className="flex items-center gap-3">
+              {/* INTERACTIVE CALCULATOR */}
+              <div className="bg-deli-grey p-8 rounded-[2rem] mb-8">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div className="flex flex-col items-center md:items-start">
+                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-4 tracking-widest text-center md:text-left">Guest Count</p>
+                        <div className="flex items-center gap-4">
                             <button 
                                 onClick={() => setGuestCount(Math.max(1, (guestCount || 0) - 1))}
-                                className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-deli-blue hover:bg-deli-blue hover:text-white transition-all shadow-sm"
+                                className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-deli-blue shadow-sm hover:bg-deli-blue hover:text-white transition-all"
                             >
                                 <Minus size={16} />
                             </button>
@@ -159,64 +157,46 @@ export const CateringPage = () => {
                                 type="text"
                                 value={guestCount}
                                 onChange={handleInputChange}
-                                className="w-20 h-12 text-center text-2xl font-serif font-bold text-deli-blue bg-white rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-deli-mustard/20 focus:border-deli-mustard shadow-inner"
-                                placeholder="0"
+                                className="w-16 text-center text-2xl font-serif font-bold text-deli-blue bg-transparent border-b-2 border-deli-blue/20 focus:outline-none focus:border-deli-mustard"
                             />
 
                             <button 
                                 onClick={() => setGuestCount((guestCount || 0) + 1)}
-                                className="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-deli-blue hover:bg-deli-blue hover:text-white transition-all shadow-sm"
+                                className="w-10 h-10 rounded-full bg-white flex items-center justify-center text-deli-blue shadow-sm hover:bg-deli-blue hover:text-white transition-all"
                             >
                                 <Plus size={16} />
                             </button>
                         </div>
                     </div>
-                    <div className="text-left md:text-right border-t md:border-t-0 md:border-l border-slate-200 pt-4 md:pt-0 md:pl-6 min-w-[140px]">
-                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-1 tracking-widest">Estimated Total</p>
-                        <p className="text-4xl font-serif font-bold text-deli-blue leading-none">
+
+                    <div className="text-center md:text-right pt-6 md:pt-0 border-t md:border-t-0 md:border-l border-slate-200 md:pl-8">
+                        <p className="text-[10px] uppercase font-bold text-slate-400 mb-2 tracking-widest">Estimated Total</p>
+                        <p className="text-5xl font-serif font-bold text-deli-blue">
                             {calculateTotal(selectedItem.price, guestCount)}
                         </p>
-                        <p className="text-[10px] text-slate-400 mt-2 italic">£{formatPrice(selectedItem.price)} per head</p>
                     </div>
                 </div>
 
-                {/* MINIMUM GUEST WARNING */}
                 {guestCount > 0 && guestCount < MINIMUM_GUESTS && (
-                    <div className="mt-4 flex items-center gap-2 text-deli-mustard bg-deli-mustard/5 p-3 rounded-xl border border-deli-mustard/20 animate-in fade-in slide-in-from-top-1">
-                        <AlertCircle size={14} />
-                        <p className="text-[10px] font-bold uppercase tracking-tight">Small events may be subject to a minimum spend.</p>
+                    <div className="mt-6 flex items-center justify-center gap-2 text-deli-mustard italic text-xs">
+                        <AlertCircle size={14} /> Min. spend may apply for under {MINIMUM_GUESTS} guests
                     </div>
                 )}
               </div>
 
-              <div className="space-y-6 mb-10">
-                <div>
-                    <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-2">Package Details</h4>
-                    <p className="text-slate-500 text-sm leading-relaxed whitespace-pre-line italic">
-                        {selectedItem.description}
-                    </p>
-                </div>
-                {selectedItem.ingredients && (
-                  <div>
-                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-2">Typically Includes</h4>
-                      <div className="bg-deli-grey/30 p-4 rounded-xl border border-slate-100">
-                        <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-line">
-                            {selectedItem.ingredients}
-                        </p>
-                      </div>
-                  </div>
-                )}
+              <div className="mb-10 text-center">
+                  <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-300 mb-3">Package Details</h4>
+                  <p className="text-slate-500 text-sm leading-relaxed italic max-w-md mx-auto">
+                      {selectedItem.description}
+                  </p>
               </div>
 
-              {/* ACTION BUTTONS */}
-              <div className="flex flex-col gap-3">
-                <a 
-                    href={`mailto:hello@clevedondeli.co.uk?subject=Catering Inquiry: ${selectedItem.name}&body=Hi, I would like to inquire about the ${selectedItem.name} package for ${guestCount || '____'} guests.`}
-                    className="w-full bg-deli-blue text-white py-5 rounded-full text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-deli-mustard transition-all shadow-xl"
-                >
-                    <Mail size={16} /> Request This Package
-                </a>
-              </div>
+              <a 
+                  href={`mailto:hello@clevedondeli.co.uk?subject=Catering Inquiry: ${selectedItem.name}&body=Hi, I would like to inquire about the ${selectedItem.name} package for ${guestCount} guests.`}
+                  className="w-full bg-deli-blue text-white py-5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 hover:bg-deli-mustard transition-all shadow-xl"
+              >
+                  <Mail size={16} /> Request Package Availability
+              </a>
             </div>
           </div>
         </div>

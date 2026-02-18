@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { X, ShoppingBag, Award, MapPin } from 'lucide-react';
+import { X, ShoppingBag, Award, MapPin, ArrowRight } from 'lucide-react';
 
 export const DeliPage = () => {
   const [items, setItems] = useState([]);
@@ -24,7 +24,7 @@ export const DeliPage = () => {
   };
 
   return (
-    <div className="pt-10 md:pt-10 pb-24 min-h-screen bg-deli-grey relative">
+    <div className="pt-10 pb-24 min-h-screen bg-white relative">
       {/* 1. Deli Hero Header */}
       <header className="container mx-auto px-6 mb-20 text-center">
         <div className="flex items-center justify-center gap-3 mb-6">
@@ -36,55 +36,48 @@ export const DeliPage = () => {
           Deli <span className="text-slate-900 not-italic font-bold">&</span> Retail
         </h1>
         <p className="mt-6 text-slate-500 font-light italic max-w-xl mx-auto text-lg">
-          Hand-selected local cheeses, cured meats, and pantry essentials from across the Somerset levels.
+          Hand-selected local cheeses, cured meats, and pantry essentials.
         </p>
       </header>
 
-      {/* 2. Retail Grid */}
-      <main className="container mx-auto px-6 max-w-6xl">
+      {/* 2. Fancy Larder List */}
+      <main className="container mx-auto px-6 max-w-4xl">
+        <h2 className="text-xs font-bold uppercase tracking-[0.3em] text-slate-300 mb-12 text-center">Provision List</h2>
+
         {loading ? (
           <div className="text-center py-20 font-serif italic text-deli-blue animate-pulse">Stocking the shelves...</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="space-y-12">
             {items.map((item) => (
               <div 
                 key={item.id} 
                 onClick={() => setSelectedItem(item)}
-                className="group cursor-pointer bg-white rounded-[2rem] p-4 border border-transparent hover:border-deli-mustard/20 hover:shadow-2xl transition-all duration-500"
+                className="group cursor-pointer relative"
               >
-                {/* Product Image Card */}
-                <div className="aspect-square w-full rounded-[1.5rem] overflow-hidden bg-deli-grey mb-6 relative">
-                  {item.image_url ? (
-                    <img 
-                      src={item.image_url} 
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                      alt={item.name} 
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center text-slate-300">
-                      <ShoppingBag size={48} strokeWidth={1} />
-                    </div>
-                  )}
+                {/* Header: Name ..... Price */}
+                <div className="flex items-end gap-2 mb-1">
+                  <h3 className="text-xl md:text-2xl font-serif text-deli-blue group-hover:text-deli-mustard transition-colors leading-none flex-shrink-0">
+                    {item.name}
+                    {item.is_deal && <Award size={14} className="inline ml-2 text-deli-mustard mb-1" />}
+                  </h3>
                   
-                  {item.is_deal && (
-                    <div className="absolute top-4 left-4 bg-deli-mustard text-white text-[9px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
-                      Staff Pick
-                    </div>
-                  )}
-                </div>
-
-                <div className="px-2 pb-2">
-                  <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-xl font-serif text-deli-blue group-hover:text-deli-mustard transition-colors leading-tight">
-                      {item.name}
-                    </h3>
-                    <span className="font-serif text-deli-blue font-bold text-lg">
+                  <div className="flex-1 border-b-2 border-dotted border-slate-200 mb-1.5 opacity-50" />
+                  
+                  <div className="flex-shrink-0 text-right leading-none">
+                    <span className="font-serif text-deli-blue font-bold text-xl">
                       {item.is_deal ? item.deal_price : item.price}
                     </span>
                   </div>
-                  <p className="text-slate-400 font-light text-xs line-clamp-2 italic">
+                </div>
+                
+                {/* Description & Detail Prompt */}
+                <div className="max-w-2xl flex justify-between items-end">
+                  <p className="text-slate-500 font-light text-sm md:text-base italic leading-relaxed">
                     {item.description}
                   </p>
+                  <div className="text-deli-mustard opacity-0 group-hover:opacity-100 transition-all transform translate-x-2 group-hover:translate-x-0">
+                    <ArrowRight size={18} />
+                  </div>
                 </div>
               </div>
             ))}
@@ -95,85 +88,39 @@ export const DeliPage = () => {
       {/* 3. PRODUCT DETAIL MODAL */}
       {selectedItem && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-deli-blue/90 backdrop-blur-sm" onClick={() => setSelectedItem(null)} />
+          <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" onClick={() => setSelectedItem(null)} />
           
-          <div className="relative bg-white w-full max-w-4xl rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl animate-in zoom-in-95 duration-300 flex flex-col md:flex-row max-h-[90vh]">
-            
-            {/* Left: Product Image */}
-            <div className="md:w-1/2 bg-deli-grey relative h-64 md:h-auto border-b md:border-b-0 md:border-r border-slate-100">
-              {selectedItem.image_url ? (
-                <img src={selectedItem.image_url} className="w-full h-full object-cover" alt={selectedItem.name} />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-slate-200">
-                  <ShoppingBag size={120} strokeWidth={0.5} />
-                </div>
-              )}
-              <button 
-                onClick={() => setSelectedItem(null)} 
-                className="absolute top-6 left-6 p-3 bg-white/20 backdrop-blur-md hover:bg-white text-deli-blue rounded-full transition-all md:hidden"
-              >
-                <X size={20} />
-              </button>
-            </div>
+          <div className="relative bg-white w-full max-w-lg rounded-[2.5rem] p-8 md:p-12 shadow-2xl animate-in zoom-in-95 duration-300">
+            <button onClick={() => setSelectedItem(null)} className="absolute top-6 right-6 p-2 text-slate-400 hover:text-deli-blue transition-colors">
+              <X size={24} />
+            </button>
 
-            {/* Right: Product Details */}
-            <div className="md:w-1/2 p-8 md:p-14 overflow-y-auto relative">
-               <button 
-                onClick={() => setSelectedItem(null)} 
-                className="absolute top-8 right-8 p-2 text-slate-300 hover:text-deli-mustard transition-colors hidden md:block"
-              >
-                <X size={24} />
-              </button>
-
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px]">Larder Profile</span>
-                {selectedItem.is_deal && (
-                  <span className="flex items-center gap-1 bg-deli-mustard/10 text-deli-mustard text-[9px] px-2 py-0.5 rounded-full font-bold uppercase">
-                    <Award size={10} /> Artisan Choice
-                  </span>
-                )}
-              </div>
-
+            <div className="text-center">
+              <span className="text-deli-mustard font-bold uppercase tracking-[0.2em] text-[10px] mb-4 block">Larder Profile</span>
               <h2 className="text-4xl md:text-5xl font-serif text-deli-blue italic mb-6 leading-tight">
                 {selectedItem.name}
               </h2>
-
-              <div className="space-y-8">
-                <div>
-                  <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-3">The Details</h4>
-                  <p className="text-slate-600 font-light leading-relaxed italic text-lg">
-                    "{selectedItem.description}"
-                  </p>
-                </div>
+              
+              <div className="h-px w-12 bg-deli-mustard/30 mx-auto mb-8" />
+              
+              <div className="space-y-6 mb-8 text-center">
+                <p className="text-slate-600 font-light leading-relaxed italic text-lg">
+                  "{selectedItem.description}"
+                </p>
 
                 {selectedItem.ingredients && (
-                  <div className="bg-deli-grey/50 p-6 rounded-2xl border border-slate-100">
-                    <div className="flex items-center gap-2 mb-2">
-                      <MapPin size={12} className="text-deli-mustard" />
-                      <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400">Provenance</h4>
-                    </div>
-                    <p className="text-slate-500 text-sm leading-relaxed">
-                      {selectedItem.ingredients}
-                    </p>
+                  <div className="inline-flex items-center gap-2 bg-deli-grey px-4 py-2 rounded-full">
+                    <MapPin size={12} className="text-deli-mustard" />
+                    <span className="text-[10px] font-bold text-deli-blue uppercase tracking-widest">{selectedItem.ingredients}</span>
                   </div>
                 )}
+              </div>
 
-                <div className="pt-8 border-t border-slate-100 flex justify-between items-end">
-                  <div>
-                    <h4 className="text-[10px] uppercase tracking-[0.2em] font-bold text-slate-400 mb-1">Retail Price</h4>
-                    <p className="text-4xl font-serif text-deli-blue font-bold">
-                      {selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price}
-                    </p>
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    {selectedItem.tags?.split(',').map(tag => (
-                      <span key={tag} className="px-4 py-2 bg-deli-grey rounded-xl text-[10px] font-bold text-deli-blue uppercase tracking-tighter">
-                        {tag.trim()}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="flex flex-col items-center pt-6 border-t border-slate-100">
+                <p className="text-4xl font-serif text-deli-blue font-bold">
+                  {selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price}
+                </p>
+                {selectedItem.is_deal && <span className="text-deli-mustard font-bold text-[10px] uppercase mt-2">Artisan's Choice</span>}
               </div>
             </div>
           </div>

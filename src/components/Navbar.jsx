@@ -20,12 +20,17 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
 
   const useSolidStyle = isScrolled || forceSolid || isMobileMenuOpen;
 
+  // CSS Variable Helper for your colors
+  // Deli Green: #465d6a
+  // Deli Gold: #c8a011
+  // Deli Cream: #f0ede6
+
   return (
     <>
       <nav 
-        className={`fixed top-[40px] left-0 w-full z-[150] transition-all duration-500 ${
+        className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 ${
           useSolidStyle 
-            ? 'bg-deli-grey/95 backdrop-blur-md py-3 shadow-lg' 
+            ? 'bg-[#f0ede6]/95 backdrop-blur-md py-3 shadow-lg border-b border-[#465d6a]/10' 
             : 'bg-transparent py-6'
         }`}
       >
@@ -45,19 +50,22 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
             />
           </button>
 
-          {/* Desktop Navigation - Slate Blue focus */}
-          <div className={`hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.25em] ${
-            useSolidStyle ? 'text-deli-blue' : 'text-white/90'
+          {/* Desktop Navigation */}
+          <div className={`hidden md:flex items-center gap-8 text-[11px] font-black uppercase tracking-[0.25em] ${
+            useSolidStyle ? 'text-[#465d6a]' : 'text-white/90'
           }`}>
-            <button onClick={() => handleNavClick('home')} className={`hover:text-deli-mustard transition-colors ${currentView === 'home' ? 'text-deli-mustard' : ''}`}>Home</button>
-            <button onClick={() => handleNavClick('cafe')} className={`hover:text-deli-mustard transition-colors ${currentView === 'cafe' ? 'text-deli-mustard' : ''}`}>Cafe</button>
-            <button onClick={() => handleNavClick('deli')} className={`hover:text-deli-mustard transition-colors ${currentView === 'deli' ? 'text-deli-mustard' : ''}`}>Deli</button>
-            <button onClick={() => handleNavClick('catering')} className={`hover:text-deli-mustard transition-colors ${currentView === 'catering' ? 'text-deli-mustard' : ''}`}>Catering</button>
+            <button onClick={() => handleNavClick('home')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'home' ? 'text-[#c8a011]' : ''}`}>Home</button>
+            <button onClick={() => handleNavClick('cafe')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'cafe' ? 'text-[#c8a011]' : ''}`}>Cafe</button>
+            <button onClick={() => handleNavClick('deli')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'deli' ? 'text-[#c8a011]' : ''}`}>Deli</button>
+            <button onClick={() => handleNavClick('catering')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'catering' ? 'text-[#c8a011]' : ''}`}>Catering</button>
+            
+            {/* Added Gallery Link */}
+            <button onClick={() => handleNavClick('gallery')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'gallery' ? 'text-[#c8a011]' : ''}`}>Gallery</button>
             
             <a href="#location" className={`ml-4 px-6 py-2 rounded-full border-2 font-black text-[10px] transition-all duration-500 ${
               useSolidStyle 
-                ? 'border-deli-blue text-deli-blue hover:bg-deli-blue hover:text-white' 
-                : 'border-white text-white hover:bg-white hover:text-deli-blue'
+                ? 'border-[#465d6a] text-[#465d6a] hover:bg-[#465d6a] hover:text-white' 
+                : 'border-white text-white hover:bg-white hover:text-[#465d6a]'
             }`}>
               Find Us
             </a>
@@ -68,7 +76,7 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
             <button 
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={`p-2 rounded-lg transition-colors ${
-                useSolidStyle ? 'text-deli-blue bg-white/50' : 'text-white bg-white/10'
+                useSolidStyle ? 'text-[#465d6a] bg-white/50' : 'text-white bg-white/10'
               }`}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -78,20 +86,23 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <div className={`fixed inset-0 z-[140] bg-deli-grey transition-transform duration-500 ease-in-out md:hidden ${
+      <div className={`fixed inset-0 z-[140] bg-[#f0ede6] transition-transform duration-500 ease-in-out md:hidden ${
         isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>
         <div className="flex flex-col items-center justify-center h-full gap-8 px-6">
           <img src={logo} alt="Logo" className="h-20 w-auto mb-4" />
           
-          <button onClick={() => handleNavClick('home')} className={`text-4xl font-serif italic ${currentView === 'home' ? 'text-deli-mustard' : 'text-deli-blue'}`}>Home</button>
-          <button onClick={() => handleNavClick('cafe')} className={`text-4xl font-serif italic ${currentView === 'cafe' ? 'text-deli-mustard' : 'text-deli-blue'}`}>Cafe Menu</button>
-          <button onClick={() => handleNavClick('deli')} className={`text-4xl font-serif italic ${currentView === 'deli' ? 'text-deli-mustard' : 'text-deli-blue'}`}>The Deli Shop</button>
-          <button onClick={() => handleNavClick('catering')} className={`text-4xl font-serif italic ${currentView === 'catering' ? 'text-deli-mustard' : 'text-deli-blue'}`}>Bespoke Catering</button>
+          <button onClick={() => handleNavClick('home')} className={`text-4xl font-serif italic ${currentView === 'home' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Home</button>
+          <button onClick={() => handleNavClick('cafe')} className={`text-4xl font-serif italic ${currentView === 'cafe' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Cafe Menu</button>
+          <button onClick={() => handleNavClick('deli')} className={`text-4xl font-serif italic ${currentView === 'deli' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>The Deli Shop</button>
+          <button onClick={() => handleNavClick('catering')} className={`text-4xl font-serif italic ${currentView === 'catering' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Bespoke Catering</button>
+          
+          {/* Added Gallery Mobile Link */}
+          <button onClick={() => handleNavClick('gallery')} className={`text-4xl font-serif italic ${currentView === 'gallery' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Gallery</button>
 
-          <div className="h-px w-12 bg-deli-blue/10 my-4" />
+          <div className="h-px w-12 bg-[#465d6a]/10 my-4" />
 
-          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-deli-blue font-bold uppercase tracking-widest text-sm">Find Us & Contact</a>
+          <a href="#contact" onClick={() => setIsMobileMenuOpen(false)} className="text-[#465d6a] font-bold uppercase tracking-widest text-sm">Find Us & Contact</a>
         </div>
       </div>
     </>

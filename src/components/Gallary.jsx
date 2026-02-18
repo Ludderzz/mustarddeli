@@ -10,7 +10,7 @@ import tart from '../assets/tart.jpg';
 import sandwich from '../assets/sandwhich.jpg';
 import cake1 from '../assets/cake1.jpg';
 
-const galleryImages = [
+const gallaryImages = [
   { id: 1, src: shopFront, alt: 'Mustard Deli Clevedon', category: 'Exterior' },
   { id: 2, src: food1, alt: 'Vegan Spinach & Tomato Rolls', category: 'Savory' },
   { id: 3, src: food2, alt: 'Mini Filled Yorkshire Puddings', category: 'Catering' },
@@ -20,7 +20,7 @@ const galleryImages = [
   { id: 7, src: cake1, alt: 'Blood Orange Polenta Cake', category: 'Bakery' },
 ];
 
-export const Gallery = () => {
+export const Gallary = () => {
   const [selectedImg, setSelectedImg] = useState(null);
 
   return (
@@ -41,7 +41,7 @@ export const Gallery = () => {
 
         {/* Masonry-style Grid */}
         <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {galleryImages.map((image) => (
+          {gallaryImages.map((image) => (
             <div 
               key={image.id}
               onClick={() => setSelectedImg(image.src)}

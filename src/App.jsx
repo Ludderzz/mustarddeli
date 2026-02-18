@@ -8,7 +8,8 @@ import { DeliPage } from './pages/DeliPage';
 import { CateringPage } from './pages/CateringPage';
 import { InfoSection } from './components/InfoSection'; 
 import { ReviewsSection } from './components/Reviews';
-import { Gallery } from './components/Gallary';
+import { Gallary } from './components/Gallary'; // Note: Ensure spelling matches your file (Gallery vs Gallary)
+import Showcase from './pages/showcase';
 
 function App() {
   const [currentView, setCurrentView] = useState('home');
@@ -35,7 +36,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen selection:bg-deli-mustard selection:text-white bg-deli-grey flex flex-col">
+    <div className="min-h-screen selection:bg-[#c8a011] selection:text-white bg-[#f0ede6] flex flex-col">
       
       {/* 1. FIXED HEADER UNIT */}
       <header className="fixed top-0 left-0 w-full z-50">
@@ -53,40 +54,48 @@ function App() {
           ? 'pt-0' 
           : 'pt-32 md:pt-44' 
       }`}>
+        {/* HOME VIEW */}
         {currentView === 'home' && (
           <>
             <Hero setView={setCurrentView} />
             <AboutSection />
-            <Gallery />
+            <Gallary /> {/* Section preview on home page */}
             <ReviewsSection />
           </>
         )}
         
+        {/* PAGE VIEWS */}
         {currentView === 'cafe' && <CafePage />}
         {currentView === 'deli' && <DeliPage />}
         {currentView === 'catering' && <CateringPage />}
+        
+        {/* FULL GALLERY PAGE VIEW */}
+        {currentView === 'gallery' && <Showcase />}
       </main>
 
       {/* INFO SECTION (Above Footer) */}
       <InfoSection />
         
       {/* 3. FOOTER */}
-      <footer className="py-16 bg-deli-blue text-white mt-auto">
+      <footer className="py-16 bg-[#465d6a] text-white mt-auto">
         <div className="container mx-auto px-6">
           <div className="flex flex-col items-center">
             <div className="mb-10 flex flex-wrap justify-center gap-8 md:gap-12 text-[10px] font-bold uppercase tracking-[0.3em]">
-              <button onClick={() => setCurrentView('home')} className="hover:text-deli-mustard transition-colors cursor-pointer">Home</button>
-              <button onClick={() => setCurrentView('cafe')} className="hover:text-deli-mustard transition-colors cursor-pointer">Cafe</button>
-              <button onClick={() => setCurrentView('deli')} className="hover:text-deli-mustard transition-colors cursor-pointer">Deli</button>
-              <button onClick={() => setCurrentView('catering')} className="hover:text-deli-mustard transition-colors cursor-pointer">Catering</button>
+              <button onClick={() => setCurrentView('home')} className="hover:text-[#c8a011] transition-colors cursor-pointer text-white">Home</button>
+              <button onClick={() => setCurrentView('cafe')} className="hover:text-[#c8a011] transition-colors cursor-pointer text-white">Cafe</button>
+              <button onClick={() => setCurrentView('deli')} className="hover:text-[#c8a011] transition-colors cursor-pointer text-white">Deli</button>
+              <button onClick={() => setCurrentView('catering')} className="hover:text-[#c8a011] transition-colors cursor-pointer text-white">Catering</button>
+              
+              {/* Added Gallery to Footer */}
+              <button onClick={() => setCurrentView('gallery')} className="hover:text-[#c8a011] transition-colors cursor-pointer text-white">Gallery</button>
               
               {/* Updated Location Link */}
-              <button onClick={handleLocationClick} className="hover:text-deli-mustard transition-colors cursor-pointer text-left">Location</button>
+              <button onClick={handleLocationClick} className="hover:text-[#c8a011] transition-colors cursor-pointer text-left text-white">Location</button>
               
-              <a href="mailto:hello@mustarddeli.co.uk" className="hover:text-deli-mustard transition-colors">Contact</a>
+              <a href="mailto:hello@mustarddeli.co.uk" className="hover:text-[#c8a011] transition-colors text-white">Contact</a>
             </div>
             
-            <div className="h-px w-12 bg-deli-mustard/30 mb-8" />
+            <div className="h-px w-12 bg-[#c8a011]/30 mb-8" />
             
             <p className="text-[10px] uppercase tracking-[0.2em] opacity-50">
               © {new Date().getFullYear()} Mustard Cafe & Deli Clevedon
