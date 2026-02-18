@@ -90,7 +90,7 @@ export const Hero = ({ setView }) => {
               onClick={() => setView('cafe')} 
               className="group relative w-full sm:w-auto px-10 py-4 bg-deli-blue text-white rounded-full font-bold overflow-hidden shadow-2xl transition-all active:scale-95 text-center cursor-pointer border border-white/10"
             >
-              <span className="relative z-10 uppercase tracking-widest text-xs md:text-sm">Today's Specials</span>
+              <span className="relative z-10 uppercase tracking-widest text-xs md:text-sm">Menu</span>
               <div className="absolute inset-0 bg-deli-mustard translate-y-full group-hover:translate-y-0 transition-transform duration-300 hidden md:block" />
             </button>
             
