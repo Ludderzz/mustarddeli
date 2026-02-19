@@ -71,10 +71,15 @@ export const CateringPage = () => {
                     <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic mb-8 md:mb-12 text-center underline decoration-deli-mustard/30 underline-offset-8">{category}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                       {items.map((item) => (
-                        <div key={item.id} onClick={() => { setSelectedItem(item); setGuestCount(10); }} className="bg-deli-grey p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] hover:shadow-xl transition-all cursor-pointer group border-2 border-transparent hover:border-deli-mustard/20">
+                        <div key={item.id} onClick={() => { setSelectedItem(item); setGuestCount(10); }} className="bg-deli-grey p-6 md:p-8 rounded-[2rem] md:rounded-[2.5rem] hover:shadow-xl transition-all cursor-pointer group border-2 border-transparent hover:border-deli-mustard/20 flex flex-col">
                           <h3 className="text-xl md:text-2xl font-serif text-deli-blue mb-3 md:mb-4">{item.name}</h3>
-                          <p className="text-slate-500 italic text-sm mb-6 md:mb-8 line-clamp-3">{item.description}</p>
-                          <div className="flex justify-between items-center pt-4 md:pt-6 border-t border-slate-200">
+                          
+                          {/* FIX: Removed italic, removed line-clamp-3, added whitespace-pre-line */}
+                          <p className="text-slate-600 text-sm mb-6 md:mb-8 whitespace-pre-line leading-relaxed flex-1">
+                            {item.description}
+                          </p>
+                          
+                          <div className="flex justify-between items-center pt-4 md:pt-6 border-t border-slate-200 mt-auto">
                              <span className="font-serif font-bold text-deli-blue text-lg">£{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
                              <ArrowRight size={18} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -85,7 +90,7 @@ export const CateringPage = () => {
                 );
               }
 
-              // LAYOUT 2 & 3: PLATTERS & CANAPES (Mobile-Responsive Table)
+              // LAYOUT 2 & 3: PLATTERS & CANAPES
               return (
                 <section key={category} className="max-w-4xl mx-auto">
                   <div className="text-center mb-8 md:mb-12">
@@ -96,7 +101,6 @@ export const CateringPage = () => {
                   </div>
 
                   <div className="bg-white rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm">
-                    {/* Header - Hidden on small mobile */}
                     <div className="hidden md:grid grid-cols-12 bg-slate-50 p-4 px-8 text-[10px] font-black uppercase tracking-widest text-slate-400 border-b border-slate-100">
                       <div className="col-span-7">Item / Description</div>
                       <div className="col-span-2 text-center">{catLower.includes('platter') ? 'Portions' : ''}</div>
@@ -107,11 +111,11 @@ export const CateringPage = () => {
                       <div key={item.id} onClick={() => setSelectedItem(item)} className="flex flex-col md:grid md:grid-cols-12 p-6 md:p-8 px-6 md:px-8 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors cursor-pointer group gap-4 md:gap-0">
                         <div className="md:col-span-7 pr-0 md:pr-4">
                           <h3 className="font-serif text-lg text-deli-blue group-hover:text-deli-mustard transition-colors">{item.name}</h3>
-                          <p className="text-xs text-slate-400 italic mt-1 line-clamp-2">{item.description}</p>
+                          {/* FIX: Removed italic, allowed 2 lines for table view */}
+                          <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.description}</p>
                         </div>
                         
                         <div className="flex items-center justify-between md:contents">
-                          {/* Mobile Portion Label */}
                           <div className="md:col-span-2 text-center font-serif text-lg text-slate-600 self-center">
                             {catLower.includes('platter') ? (
                               <div className="flex flex-col md:block">
@@ -135,7 +139,7 @@ export const CateringPage = () => {
           </div>
         )}
 
-        {/* PHOTO GALLERY - Improved Grid for Mobile */}
+        {/* PHOTO GALLERY */}
         <section className="mt-24 md:mt-40 border-t border-slate-100 pt-16 md:pt-20">
           <div className="text-center mb-10 md:mb-12">
             <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px]">Gallery</span>
@@ -162,7 +166,8 @@ export const CateringPage = () => {
               
               <h2 className="text-3xl md:text-4xl font-serif text-deli-blue italic mb-4 pr-8 leading-tight">{selectedItem.name}</h2>
               
-              <div className="bg-slate-50 rounded-2xl md:rounded-3xl p-5 md:p-6 mb-8 italic text-slate-500 text-sm whitespace-pre-line leading-relaxed">
+              {/* FIX: Removed 'italic', kept whitespace-pre-line to respect Laura's line breaks */}
+              <div className="bg-slate-50 rounded-2xl md:rounded-3xl p-5 md:p-6 mb-8 text-slate-600 text-sm whitespace-pre-line leading-relaxed">
                 {selectedItem.ingredients || selectedItem.description}
               </div>
               
