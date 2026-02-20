@@ -9,6 +9,9 @@ import food3 from '../assets/catering/food3.jpeg';
 import food4 from '../assets/catering/food4.jpeg';
 import food5 from '../assets/catering/food5.jpeg';
 import food6 from '../assets/catering/food6.jpeg';
+import food7 from '../assets/catering/food7.jpeg';
+import food8 from '../assets/catering/food8.jpeg';
+import food9 from '../assets/catering/food9.jpeg';
 
 export const CateringPage = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -16,8 +19,8 @@ export const CateringPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [categories, setCategories] = useState([]);
   
-  // Array of imported images
-  const galleryImages = [food1, food2, food3, food4, food5, food6];
+  // Array of imported images - Now updated to 9 images
+  const galleryImages = [food1, food2, food3, food4, food5, food6, food7, food8, food9];
 
   useEffect(() => {
     fetchCateringMenu();
@@ -52,7 +55,7 @@ export const CateringPage = () => {
 
   return (
     <div className="pt-6 md:pt-10 pb-24 min-h-screen bg-white relative">
-     <header className="container mx-auto px-6 mb-12 md:mb-16 text-center">
+      <header className="container mx-auto px-6 mb-12 md:mb-16 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
           <div className="h-px w-6 md:w-8 bg-deli-mustard" />
           <span className="text-deli-mustard font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[9px] md:text-[10px]">Mustard Catering</span>
@@ -142,14 +145,13 @@ export const CateringPage = () => {
           </div>
         )}
 
-        {/* PHOTO GALLERY - Updated with Real Images */}
+        {/* PHOTO GALLERY - Updated with all 9 images */}
         <section className="mt-24 md:mt-40 border-t border-slate-100 pt-16 md:pt-20">
           <div className="text-center mb-10 md:mb-12">
             <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px]">Gallery</span>
             <h2 className="text-3xl md:text-4xl font-serif text-deli-blue italic">Catering Inspiration</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-6">
-            {/* Map through imported images */}
             {galleryImages.map((img, i) => (
               <div key={i} className="aspect-square bg-slate-100 rounded-2xl md:rounded-[2.5rem] overflow-hidden group relative shadow-sm hover:shadow-xl transition-all duration-500">
                 <img 
@@ -158,14 +160,6 @@ export const CateringPage = () => {
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-deli-blue/10 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
-              </div>
-            ))}
-            
-            {/* Aesthetic placeholders to fill the grid if needed */}
-            {[1, 2, 3].map((item) => (
-              <div key={`placeholder-${item}`} className="aspect-square bg-slate-50 rounded-2xl md:rounded-[2.5rem] border-2 border-dashed border-slate-200 flex flex-col items-center justify-center text-slate-300 transition-colors hover:border-deli-mustard/20">
-                <Camera size={24} className="mb-2 opacity-20" />
-                <span className="text-[8px] uppercase font-bold tracking-[0.2em] opacity-30">More to come</span>
               </div>
             ))}
           </div>
