@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { X, MapPin, ArrowRight, ShoppingBag } from 'lucide-react';
+import { X, MapPin, ArrowRight, Camera, Sparkles } from 'lucide-react';
 
 export const DeliPage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
+  
+  // New state for bottom section
+  const [bottomInfo, setBottomInfo] = useState({ content: '', image_urls: [] });
 
   useEffect(() => {
     fetchDeliItems();
+    fetchBottomInfo();
   }, []);
 
   const fetchDeliItems = async () => {
@@ -23,7 +27,14 @@ export const DeliPage = () => {
     setLoading(false);
   };
 
-  // Helper to ensure £ sign is present
+  const fetchBottomInfo = async () => {
+    const { data } = await supabase
+      .from('deli_bottom_info')
+      .select('*')
+      .single();
+    if (data) setBottomInfo(data);
+  };
+
   const renderPrice = (price) => {
     if (!price) return '';
     const cleanPrice = price.toString().replace('£', '').trim();
@@ -40,12 +51,9 @@ export const DeliPage = () => {
           <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[9px] md:text-[10px]">Artisanal Larder</span>
           <div className="h-px w-6 md:w-8 bg-deli-mustard" />
         </div>
-        
-        {/* Updated Heading: Blue, Bold, No Italics, Yellow Ampersand */}
         <h1 className="text-4xl md:text-8xl font-serif font-bold mb-4 leading-tight text-deli-blue uppercase tracking-tight">
           Deli <span className="text-deli-mustard">&</span> Retail
         </h1>
-        
         <p className="mt-4 text-slate-400 font-light italic max-w-xl mx-auto text-sm md:text-lg px-4">
           Hand-selected local cheeses, cured meats, and pantry essentials.
         </p>
@@ -67,30 +75,20 @@ export const DeliPage = () => {
                 onClick={() => setSelectedItem(item)}
                 className="flex flex-col md:grid md:grid-cols-12 p-6 md:p-8 px-6 md:px-10 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors cursor-pointer group gap-2 md:gap-0"
               >
-                {/* Item Info */}
                 <div className="md:col-span-9 pr-0 md:pr-8">
                   <div className="flex items-center gap-2">
-                    <h3 className="font-serif text-xl text-deli-blue group-hover:text-deli-mustard transition-colors leading-tight">
-                        {item.name}
-                    </h3>
+                    <h3 className="font-serif text-xl text-deli-blue group-hover:text-deli-mustard transition-colors leading-tight">{item.name}</h3>
                     {item.is_deal && (
-                      <span className="bg-deli-mustard/10 text-deli-mustard text-[8px] font-black px-2 py-0.5 rounded uppercase tracking-tighter">
-                        Special
-                      </span>
+                      <span className="bg-deli-mustard/10 text-deli-mustard text-[8px] font-black px-2 py-0.5 rounded uppercase tracking-tighter">Special</span>
                     )}
                   </div>
-                  <p className="text-xs text-slate-500 mt-2 line-clamp-2 font-light italic leading-relaxed">
-                    {item.description}
-                  </p>
+                  <p className="text-xs text-slate-500 mt-2 line-clamp-2 font-light italic leading-relaxed">{item.description}</p>
                 </div>
 
-                {/* Price & Action */}
                 <div className="flex items-center justify-between md:justify-end md:col-span-3 text-right">
                     <div className="md:hidden text-[10px] text-deli-mustard font-bold uppercase tracking-widest">View Detail</div>
                     <div className="flex items-center gap-4">
-                        <p className="font-serif font-bold text-xl text-deli-blue">
-                            {renderPrice(item.is_deal ? item.deal_price : item.price)}
-                        </p>
+                        <p className="font-serif font-bold text-xl text-deli-blue">{renderPrice(item.is_deal ? item.deal_price : item.price)}</p>
                         <ArrowRight size={18} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
@@ -98,13 +96,43 @@ export const DeliPage = () => {
             ))}
           </div>
         )}
+
+        {/* 3. NEW BOTTOM INFO & GALLERY SECTION */}
+        <section className="mt-20 md:mt-32 border-t border-slate-100 pt-16">
+          <div className="max-w-2xl mx-auto text-center mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-4">
+              <Sparkles size={14} className="text-deli-mustard" />
+              <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">Seasonal Notes</span>
+            </div>
+            <p className="text-lg md:text-xl font-serif italic text-slate-600 leading-relaxed px-4">
+              {bottomInfo.content || "Visit us in-store to browse our full artisanal selection."}
+            </p>
+          </div>
+
+          {/* GALLERY GRID */}
+          {bottomInfo.image_urls?.length > 0 && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-12">
+              {bottomInfo.image_urls.map((url, index) => (
+                <div 
+                  key={index} 
+                  className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group border border-slate-100"
+                >
+                  <img 
+                    src={url} 
+                    alt={`Deli gallery ${index}`} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
       </main>
 
-      {/* 3. PRODUCT DETAIL MODAL */}
+      {/* 4. PRODUCT DETAIL MODAL */}
       {selectedItem && (
         <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedItem(null)} />
-          
           <div className="relative bg-white w-full max-w-xl rounded-t-[2.5rem] md:rounded-[3rem] overflow-hidden shadow-2xl animate-in slide-in-from-bottom md:zoom-in-95 duration-300 max-h-[92vh] flex flex-col">
             <div className="p-8 md:p-12 overflow-y-auto">
               <button onClick={() => setSelectedItem(null)} className="absolute top-8 right-8 text-slate-300 hover:text-deli-blue transition-colors">
@@ -113,15 +141,9 @@ export const DeliPage = () => {
 
               <div className="text-center md:text-left mt-4">
                 <span className="text-deli-mustard font-bold uppercase tracking-[0.2em] text-[10px] mb-2 block">Item Selection</span>
-                <h2 className="text-3xl md:text-5xl font-serif text-deli-blue italic mb-6 leading-tight">
-                  {selectedItem.name}
-                </h2>
-                
+                <h2 className="text-3xl md:text-5xl font-serif text-deli-blue italic mb-6 leading-tight">{selectedItem.name}</h2>
                 <div className="bg-slate-50 rounded-3xl p-6 md:p-8 mb-8">
-                  <p className="text-slate-600 font-light leading-relaxed italic text-base md:text-lg">
-                    "{selectedItem.description}"
-                  </p>
-                  
+                  <p className="text-slate-600 font-light leading-relaxed italic text-base md:text-lg">"{selectedItem.description}"</p>
                   {selectedItem.ingredients && (
                     <div className="mt-6 flex items-center justify-center md:justify-start gap-2 text-deli-blue/60">
                       <MapPin size={14} className="text-deli-mustard" />
@@ -129,19 +151,11 @@ export const DeliPage = () => {
                     </div>
                   )}
                 </div>
-
                 <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-slate-100 gap-6">
                   <div className="text-center md:text-left">
-                    <p className="text-4xl font-serif text-deli-blue font-bold">
-                        {renderPrice(selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price)}
-                    </p>
-                    {selectedItem.is_deal && <span className="text-deli-mustard font-bold text-[10px] uppercase tracking-widest">Artisan's Choice</span>}
+                    <p className="text-4xl font-serif text-deli-blue font-bold">{renderPrice(selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price)}</p>
                   </div>
-                  
-                  <button 
-                    onClick={() => setSelectedItem(null)}
-                    className="w-full md:w-auto px-10 py-4 bg-deli-blue text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-deli-mustard transition-all shadow-lg"
-                  >
+                  <button onClick={() => setSelectedItem(null)} className="w-full md:w-auto px-10 py-4 bg-deli-blue text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-deli-mustard transition-all shadow-lg">
                     Close details
                   </button>
                 </div>
