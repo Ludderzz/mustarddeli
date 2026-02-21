@@ -40,7 +40,11 @@ function App() {
   return (
     <div className="min-h-screen selection:bg-[#c8a011] selection:text-white bg-[#f0ede6] flex flex-col">
       
-      <header className="fixed top-0 left-0 w-full z-50">
+      {/* FIX: Added 'flex flex-col' to the header. 
+          This ensures the AnnouncementBar and Navbar stack vertically 
+          without overlapping each other.
+      */}
+      <header className="fixed top-0 left-0 w-full z-50 flex flex-col">
         <AnnouncementBar />
         <Navbar 
           setView={setCurrentView} 
@@ -49,10 +53,14 @@ function App() {
         />
       </header>
 
+      {/* FIX: Adjusted padding-top (pt) for sub-pages.
+          On sub-pages, we need more space (pt-40/pt-48) to account for the 
+          combined height of both bars.
+      */}
       <main className={`flex-grow transition-all duration-500 ${
         currentView === 'home' 
           ? 'pt-0' 
-          : 'pt-32 md:pt-44' 
+          : 'pt-40 md:pt-48' 
       }`}>
         {/* HOME VIEW */}
         {currentView === 'home' && (

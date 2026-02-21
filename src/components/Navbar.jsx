@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import logo from '../assets/bgremovelogo.png'; // Import your logo file
+import logo from '../assets/bgremovelogo.png';
 
 export const Navbar = ({ setView, currentView, forceSolid }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,15 +20,14 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
 
   const useSolidStyle = isScrolled || forceSolid || isMobileMenuOpen;
 
-  // CSS Variable Helper for your colors
-  // Deli Green: #465d6a
-  // Deli Gold: #c8a011
-  // Deli Cream: #f0ede6
-
   return (
     <>
+      {/* FIX: Removed 'fixed top-0 left-0' and changed z-index.
+          The Navbar is now positioned by the header container in App.jsx,
+          allowing it to sit perfectly below the AnnouncementBar.
+      */}
       <nav 
-        className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 ${
+        className={`w-full relative transition-all duration-500 ${
           useSolidStyle 
             ? 'bg-[#f0ede6]/95 backdrop-blur-md py-3 shadow-lg border-b border-[#465d6a]/10' 
             : 'bg-transparent py-6'
@@ -36,7 +35,7 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
       >
         <div className="container mx-auto px-6 flex justify-between items-center">
           
-          {/* Logo Image Section */}
+          {/* Logo Section */}
           <button 
             onClick={() => handleNavClick('home')}
             className="flex items-center cursor-pointer z-[160]"
@@ -58,8 +57,6 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
             <button onClick={() => handleNavClick('cafe')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'cafe' ? 'text-[#c8a011]' : ''}`}>Cafe</button>
             <button onClick={() => handleNavClick('deli')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'deli' ? 'text-[#c8a011]' : ''}`}>Deli</button>
             <button onClick={() => handleNavClick('catering')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'catering' ? 'text-[#c8a011]' : ''}`}>Catering</button>
-            
-            {/* Added Gallery Link */}
             <button onClick={() => handleNavClick('gallery')} className={`hover:text-[#c8a011] transition-colors ${currentView === 'gallery' ? 'text-[#c8a011]' : ''}`}>Gallery</button>
             
             <a href="#location" className={`ml-4 px-6 py-2 rounded-full border-2 font-black text-[10px] transition-all duration-500 ${
@@ -86,6 +83,9 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
       </nav>
 
       {/* Mobile Menu Overlay */}
+      {/* FIX: Set 'inset-0' to 'fixed inset-0' to ensure it covers the screen 
+          even though the nav itself is now relative. 
+      */}
       <div className={`fixed inset-0 z-[140] bg-[#f0ede6] transition-transform duration-500 ease-in-out md:hidden ${
         isMobileMenuOpen ? 'translate-y-0' : '-translate-y-full'
       }`}>
@@ -96,8 +96,6 @@ export const Navbar = ({ setView, currentView, forceSolid }) => {
           <button onClick={() => handleNavClick('cafe')} className={`text-4xl font-serif italic ${currentView === 'cafe' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Cafe Menu</button>
           <button onClick={() => handleNavClick('deli')} className={`text-4xl font-serif italic ${currentView === 'deli' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>The Deli Shop</button>
           <button onClick={() => handleNavClick('catering')} className={`text-4xl font-serif italic ${currentView === 'catering' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Bespoke Catering</button>
-          
-          {/* Added Gallery Mobile Link */}
           <button onClick={() => handleNavClick('gallery')} className={`text-4xl font-serif italic ${currentView === 'gallery' ? 'text-[#c8a011]' : 'text-[#465d6a]'}`}>Gallery</button>
 
           <div className="h-px w-12 bg-[#465d6a]/10 my-4" />
