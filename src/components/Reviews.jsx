@@ -1,9 +1,26 @@
 import React, { useRef } from 'react';
 import reviewsData from '../assets/reviews.json';
-import { Quote, Star, MoveRight } from 'lucide-react';
+import { Quote, Star, MoveRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 export const ReviewsSection = () => {
   const scrollRef = useRef(null);
+
+  const scroll = (direction) => {
+    if (scrollRef.current) {
+      const { scrollLeft, clientWidth } = scrollRef.current;
+      // Find the width of one card (including gap)
+      const cardWidth = scrollRef.current.firstChild.offsetWidth + 32; // 32 is the gap (md:gap-8)
+      
+      const scrollTo = direction === 'left' 
+        ? scrollLeft - cardWidth 
+        : scrollLeft + cardWidth;
+      
+      scrollRef.current.scrollTo({
+        left: scrollTo,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section className="py-24 bg-white overflow-hidden">
@@ -19,6 +36,24 @@ export const ReviewsSection = () => {
             <h2 className="text-5xl md:text-6xl font-serif text-deli-blue italic leading-tight">
               Kind <span className="text-deli-mustard italic font-bold tracking-tight">Words</span>
             </h2>
+          </div>
+
+          {/* Desktop Controls (Hidden on Mobile) */}
+          <div className="hidden md:flex gap-3 mb-2">
+            <button 
+              onClick={() => scroll('left')}
+              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-mustard hover:text-white hover:border-deli-mustard transition-all duration-300 shadow-sm group"
+              aria-label="Previous review"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="p-4 rounded-full border border-slate-100 text-deli-blue hover:bg-deli-mustard hover:text-white hover:border-deli-mustard transition-all duration-300 shadow-sm group"
+              aria-label="Next review"
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
 
           {/* Mobile Swipe Indicator (Hidden on Desktop) */}
