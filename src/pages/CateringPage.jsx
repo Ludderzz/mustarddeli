@@ -58,7 +58,7 @@ export const CateringPage = () => {
 
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
-    const phoneNumber = "441275877717"; 
+    const phoneNumber = "447900462806"; 
     
     const message = `Hi Mustard Deli! I'm interested in the ${selectedItem.name}.%0A%0A` +
       `*Name:* ${formData.name}%0A` +
@@ -186,7 +186,7 @@ export const CateringPage = () => {
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <a href="tel:01275877717" className="bg-slate-100 text-deli-blue py-5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-slate-200 transition-all">
+                    <a href="tel:01275235122" className="bg-slate-100 text-deli-blue py-5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-slate-200 transition-all">
                       <Phone size={16} /> Call Deli
                     </a>
                     <button onClick={() => setShowWaForm(true)} className="bg-deli-blue text-white py-5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-deli-mustard transition-all shadow-xl">

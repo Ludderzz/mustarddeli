@@ -2,6 +2,13 @@
 // Import your local image
 import shopFront from '../assets/shopfront.jpg';
 
+// Logo Imports
+import logo1 from '../assets/logos/logo1.png';
+import logo2 from '../assets/logos/logo2.png';
+import logo3 from '../assets/logos/logo3.png';
+import logo4 from '../assets/logos/logo4.png';
+import logo5 from '../assets/logos/logo5.png';
+
 const aboutData = {
   heritage: {
     title: "Our Clevedon Roots",
@@ -42,7 +49,6 @@ export const AboutSection = () => {
               <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[10px]">The Deli Story</span>
             </div>
             
-            {/* HEADLINE: Switched logic as requested */}
             <h2 className="text-5xl md:text-7xl font-serif text-deli-blue leading-[1.1]">
               <span className="not-italic font-bold tracking-tight">Passionate</span>{' '}
               <span className="italic text-deli-mustard font-normal">about</span>{' '}
@@ -62,7 +68,6 @@ export const AboutSection = () => {
                 alt="Mustard Deli Shop Front"
               />
             </div>
-            {/* Decorative Mustard Frame Offset */}
             <div className="absolute -bottom-6 -right-6 w-32 h-32 border-r-2 border-b-2 border-deli-mustard z-0 hidden md:block" />
           </div>
         </div>
@@ -106,12 +111,44 @@ export const AboutSection = () => {
           </div>
         </div>
 
-        {/* Producers Ribbon */}
-        <div className="mt-16 flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-40 grayscale hover:grayscale-0 transition-all duration-700">
-           <span className="font-serif italic text-xl text-deli-blue">Somerset Dairy</span>
-           <span className="font-serif italic text-xl text-deli-blue">The Bakehouse</span>
-           <span className="font-serif italic text-xl text-deli-blue">Coastal Coffee</span>
-           <span className="font-serif italic text-xl text-deli-blue">Hillside Honey</span>
+        {/* 4. Producers Ribbon - Mobile Friendly Grid with names */}
+        <div className="mt-24 text-center">
+          <p className="text-deli-mustard font-bold uppercase tracking-[0.2em] text-[10px] mb-12">
+            Proud to partner with these local suppliers
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 items-start gap-x-8 gap-y-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+            
+            <div className="flex flex-col items-center gap-3">
+              <img src={logo1} alt="Pullins Bakery" className="h-10 md:h-12 w-auto object-contain" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-deli-blue">Pullins Bakery</span>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img src={logo2} alt="Triple Co Roast" className="h-12 md:h-16 w-auto object-contain" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-deli-blue text-center">Triple Co Roast</span>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img src={logo3} alt="A Better Weigh" className="h-10 md:h-12 w-auto object-contain" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-deli-blue text-center">A Better Weigh</span>
+            </div>
+
+            <div className="flex flex-col items-center justify-center min-h-[40px] md:min-h-[64px]">
+              <span className="font-serif italic text-lg md:text-xl text-deli-blue text-center leading-tight">Hodders Butchers</span>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img src={logo4} alt="The Veg Box Clevedon" className="h-12 md:h-14 w-auto object-contain" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-deli-blue text-center">The Veg Box</span>
+            </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img src={logo5} alt="Cotteswold Dairy" className="h-10 md:h-12 w-auto object-contain" />
+              <span className="text-[9px] font-bold uppercase tracking-widest text-deli-blue text-center">Cotteswold Dairy</span>
+            </div>
+
+          </div>
         </div>
 
       </div>

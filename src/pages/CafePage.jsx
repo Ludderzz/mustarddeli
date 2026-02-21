@@ -3,17 +3,20 @@ import { supabase } from '../lib/supabaseClient';
 import { X, Star } from 'lucide-react';
 
 // IMPORT images from src/assets
-import food1 from '../assets/food1.jpg';
-import food2 from '../assets/food2.jpg';
-import food3 from '../assets/food3.jpg';
-import sandwhich from '../assets/sandwhich.jpg';
+import food1 from '../assets/cafe/cafe1.jpeg';
+import food2 from '../assets/cafe/cafe2.jpeg';
+import food3 from '../assets/cafe/cafe3.jpeg';
+import food4 from '../assets/cafe/cafe4.jpeg';
+import food5 from '../assets/cafe/cafe5.jpeg';
+import food6 from '../assets/cafe/cafe6.jpeg';
 
 export const CafePage = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  const galleryImages = [food1, food2, food3, sandwhich];
+  // Updated to 6 images (added food1 and food2 again as placeholders)
+  const galleryImages = [food1, food2, food3, food4, food5, food6];
 
   useEffect(() => {
     fetchCafeMenu();
@@ -25,7 +28,6 @@ export const CafePage = () => {
       .from('menu_items')
       .select('*')
       .eq('section', 'cafe') 
-      // FIX: Order by your new position column first, then creation date
       .order('number_items', { ascending: true })
       .order('created_at', { ascending: true });
 
@@ -39,7 +41,6 @@ export const CafePage = () => {
     return `£${cleanPrice}`;
   };
 
-  // Keep the Category Tab order consistent
   const categories = [...new Set(menuItems.map(item => item.category || 'General'))];
   
   const sortedCategories = categories.sort((a, b) => {
@@ -51,20 +52,21 @@ export const CafePage = () => {
     <div className="pt-4 pb-24 min-h-screen bg-[#fcfcfc] relative">
       
       {/* 1. HERO HEADER */}
-      <header className="container mx-auto px-6 mb-6 text-center">
+      <header className="container mx-auto px-6 mb-12 text-center">
         <div className="flex items-center justify-center gap-2 mb-3">
           <div className="h-px w-4 bg-deli-mustard" />
           <span className="text-deli-mustard font-black uppercase tracking-[0.2em] text-[8px]">Mustard Cafe</span>
           <div className="h-px w-4 bg-deli-mustard" />
         </div>
         
-        <h1 className="text-5xl md:text-7xl font-serif italic leading-none mb-6">
+        <h1 className="text-5xl md:text-7xl font-serif italic leading-none mb-10">
           <span className="text-deli-mustard">The</span> <span className="text-deli-blue not-italic font-bold">Menu</span>
         </h1>
 
-        <div className="grid grid-cols-4 gap-2 max-w-md mx-auto px-4">
+        {/* Updated Gallery: Changed max-w-md to max-w-4xl and grid-cols-4 to grid-cols-3/md:grid-cols-6 */}
+        <div className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto px-4">
           {galleryImages.map((img, index) => (
-            <div key={index} className="aspect-square rounded-lg overflow-hidden shadow-sm border border-white transform transition-transform active:scale-95 bg-slate-100">
+            <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-md border-2 border-white transform transition-all hover:scale-105 bg-slate-100">
               <img src={img} alt="Featured dish" className="w-full h-full object-cover" />
             </div>
           ))}
