@@ -52,12 +52,10 @@ export const DeliPage = () => {
           <div className="h-px w-6 md:w-8 bg-deli-mustard" />
         </div>
 
-        {/* Updated Heading: Removed 'uppercase' to match other pages */}
         <h1 className="text-4xl md:text-8xl font-serif font-bold mb-4 leading-tight text-deli-blue tracking-tight">
           Deli <span className="text-deli-mustard">&</span> Retail
         </h1>
         
-        {/* Updated Description: Swapped 'cured meats' for 'artisan bread' */}
         <p className="mt-4 text-slate-400 font-light italic max-w-xl mx-auto text-sm md:text-lg px-4">
           Hand-selected local cheeses, artisan bread, and pantry essentials.
         </p>
@@ -101,30 +99,31 @@ export const DeliPage = () => {
           </div>
         )}
 
-        {/* 3. NEW BOTTOM INFO & GALLERY SECTION */}
+        {/* 3. UPDATED BOTTOM INFO & GALLERY SECTION */}
         <section className="mt-20 md:mt-32 border-t border-slate-100 pt-16">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-4">
               <Sparkles size={14} className="text-deli-mustard" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">Seasonal Notes</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">Deli Notes</span>
             </div>
             <p className="text-lg md:text-xl font-serif italic text-slate-600 leading-relaxed px-4">
               {bottomInfo.content || "Visit us in-store to browse our full artisanal selection."}
             </p>
           </div>
 
-          {/* GALLERY GRID */}
+          {/* UPDATED GALLERY GRID: grid-cols-2 on mobile ensures all 6 images fit neatly */}
           {bottomInfo.image_urls?.length > 0 && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mt-12">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mt-12 px-2 md:px-0">
               {bottomInfo.image_urls.map((url, index) => (
                 <div 
                   key={index} 
-                  className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group border border-slate-100"
+                  className="aspect-[4/5] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group border border-slate-100 bg-slate-50"
                 >
                   <img 
                     src={url} 
                     alt={`Deli gallery ${index}`} 
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    loading="lazy"
                   />
                 </div>
               ))}
