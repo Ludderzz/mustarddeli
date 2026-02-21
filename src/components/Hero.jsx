@@ -98,7 +98,7 @@ export const Hero = ({ setView }) => {
               onClick={() => setView('catering')} 
               className="w-full sm:w-auto px-10 py-4 border border-white/40 text-white rounded-full font-bold uppercase tracking-widest text-xs md:text-sm backdrop-blur-sm hover:bg-white hover:text-deli-blue transition-all text-center cursor-pointer"
             >
-              Catering Inquiry
+              Catering Enquiry
             </button>
           </div>
 

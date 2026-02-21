@@ -23,7 +23,7 @@ export const CateringPage = () => {
   const [showWaForm, setShowWaForm] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    postcode: '',
+    emailaddress: '',
     address: '',
     guests: '',
     notes: ''
@@ -58,11 +58,13 @@ export const CateringPage = () => {
 
   const handleWhatsAppSubmit = (e) => {
     e.preventDefault();
-    const phoneNumber = "441275877717"; // Replace with your WhatsApp-enabled number (no + or spaces)
+    const phoneNumber = "441275877717"; 
+    
+    // Updated message to include correct variables
     const message = `Hi Mustard Deli! I'm interested in the ${selectedItem.name}.%0A%0A` +
       `*Name:* ${formData.name}%0A` +
-      `*Postcode:* ${formData.postcode}%0A` +
-      `*Address:* ${formData.address}%0A` +
+      `*Email:* ${formData.emailaddress}%0A` +
+      `*Delivery Address:* ${formData.address}%0A` +
       `*Guests:* ${formData.guests}%0A` +
       `*Extra Info:* ${formData.notes}`;
     
@@ -189,33 +191,53 @@ export const CateringPage = () => {
                       <Phone size={16} /> Call Deli
                     </a>
                     <button onClick={() => setShowWaForm(true)} className="bg-deli-blue text-white py-5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-deli-mustard transition-all shadow-xl">
-                      <MessageCircle size={16} /> WhatsApp Inquiry
+                      <MessageCircle size={16} /> WhatsApp enquiry 
                     </button>
                   </div>
                 </>
               ) : (
                 <form onSubmit={handleWhatsAppSubmit} className="space-y-4">
                   <div className="mb-6">
-                    <button onClick={() => setShowWaForm(false)} className="text-deli-mustard font-bold text-[10px] uppercase tracking-widest mb-2 flex items-center gap-1">← Back to details</button>
-                    <h2 className="text-2xl font-serif text-deli-blue italic">Inquiry Details</h2>
+                    <button type="button" onClick={() => setShowWaForm(false)} className="text-deli-mustard font-bold text-[10px] uppercase tracking-widest mb-2 flex items-center gap-1">← Back to details</button>
+                    <h2 className="text-2xl font-serif text-deli-blue italic">Enquiry Details</h2>
                   </div>
                   
                   <div className="space-y-3">
-                    <input required placeholder="Your Name" className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
-                      onChange={e => setFormData({...formData, name: e.target.value})} />
+                    <input 
+                      required 
+                      placeholder="Your Name" 
+                      className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
+                      onChange={e => setFormData({...formData, name: e.target.value})} 
+                    />
                     
-                    <div className="grid grid-cols-2 gap-3">
-                      <input required placeholder="Postcode" className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
-                        onChange={e => setFormData({...formData, postcode: e.target.value})} />
-                      <input placeholder="Est. Guests" className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
-                        onChange={e => setFormData({...formData, guests: e.target.value})} />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      <input 
+                        required 
+                        type="email" // Forces email keyboard and @ validation
+                        placeholder="Email Address" 
+                        className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
+                        onChange={e => setFormData({...formData, emailaddress: e.target.value})} 
+                      />
+                      <input 
+                        placeholder="Est. Guests" 
+                        className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
+                        onChange={e => setFormData({...formData, guests: e.target.value})} 
+                      />
                     </div>
 
-                    <input required placeholder="Event Address" className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
-                      onChange={e => setFormData({...formData, address: e.target.value})} />
+                    <input 
+                      required 
+                      placeholder="Address (if delivery required)" 
+                      className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
+                      onChange={e => setFormData({...formData, address: e.target.value})} 
+                    />
 
-                    <textarea placeholder="Tell us more (Dates, Dietary reqs, etc.)" rows="3" className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
-                      onChange={e => setFormData({...formData, notes: e.target.value})} />
+                    <textarea 
+                      placeholder="Tell us more (Dates, Dietary reqs, etc.)" 
+                      rows="3" 
+                      className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
+                      onChange={e => setFormData({...formData, notes: e.target.value})} 
+                    />
                   </div>
 
                   <button type="submit" className="w-full bg-deli-mustard text-white py-5 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 shadow-xl mt-4">
