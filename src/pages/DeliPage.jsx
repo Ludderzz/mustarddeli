@@ -104,7 +104,7 @@ export const DeliPage = () => {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-4">
               <Sparkles size={14} className="text-deli-mustard" />
-              <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">Deli Notes</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">The Mustard Deli</span>
             </div>
             <p className="text-lg md:text-xl font-serif italic text-slate-600 leading-relaxed px-4">
               {bottomInfo.content || "Visit us in-store to browse our full artisanal selection."}
