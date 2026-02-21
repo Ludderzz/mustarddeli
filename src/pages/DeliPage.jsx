@@ -51,11 +51,15 @@ export const DeliPage = () => {
           <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[9px] md:text-[10px]">Artisanal Larder</span>
           <div className="h-px w-6 md:w-8 bg-deli-mustard" />
         </div>
-        <h1 className="text-4xl md:text-8xl font-serif font-bold mb-4 leading-tight text-deli-blue uppercase tracking-tight">
+
+        {/* Updated Heading: Removed 'uppercase' to match other pages */}
+        <h1 className="text-4xl md:text-8xl font-serif font-bold mb-4 leading-tight text-deli-blue tracking-tight">
           Deli <span className="text-deli-mustard">&</span> Retail
         </h1>
+        
+        {/* Updated Description: Swapped 'cured meats' for 'artisan bread' */}
         <p className="mt-4 text-slate-400 font-light italic max-w-xl mx-auto text-sm md:text-lg px-4">
-          Hand-selected local cheeses, cured meats, and pantry essentials.
+          Hand-selected local cheeses, artisan bread, and pantry essentials.
         </p>
       </header>
 
