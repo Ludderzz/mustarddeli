@@ -60,7 +60,6 @@ export const CateringPage = () => {
     e.preventDefault();
     const phoneNumber = "441275877717"; 
     
-    // Updated message to include correct variables
     const message = `Hi Mustard Deli! I'm interested in the ${selectedItem.name}.%0A%0A` +
       `*Name:* ${formData.name}%0A` +
       `*Email:* ${formData.emailaddress}%0A` +
@@ -95,7 +94,7 @@ export const CateringPage = () => {
         {loading ? (
           <div className="text-center py-20 font-serif italic text-deli-blue animate-pulse text-2xl">Preparing the menu...</div>
         ) : (
-          <div className="space-y-20 md:space-y-32">
+          <div className="space-y-16 md:space-y-24">
             {categories.map((category) => {
               const items = menuItems.filter(item => (item.category || 'Packages') === category);
               const catLower = category.toLowerCase();
@@ -103,15 +102,15 @@ export const CateringPage = () => {
               if (catLower.includes('set menu')) {
                 return (
                   <section key={category}>
-                    <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic mb-12 text-center underline decoration-deli-mustard/30 underline-offset-8">{category}</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic mb-10 text-center underline decoration-deli-mustard/30 underline-offset-8">{category}</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                       {items.map((item) => (
-                        <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-slate-50 p-8 rounded-[2.5rem] hover:shadow-xl transition-all cursor-pointer group border-2 border-transparent hover:border-deli-mustard/20 flex flex-col">
-                          <h3 className="text-2xl font-serif text-deli-blue mb-4">{item.name}</h3>
-                          <p className="text-slate-600 text-sm mb-8 whitespace-pre-line leading-relaxed flex-1">{item.description}</p>
-                          <div className="flex justify-between items-center pt-6 border-t border-slate-200">
-                             <span className="font-serif font-bold text-deli-blue text-lg">£{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
-                             <ArrowRight size={18} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
+                        <div key={item.id} onClick={() => setSelectedItem(item)} className="bg-slate-50 p-6 rounded-[2rem] hover:shadow-lg transition-all cursor-pointer group border border-slate-100 hover:border-deli-mustard/20 flex flex-col">
+                          <h3 className="text-xl font-serif text-deli-blue mb-3">{item.name}</h3>
+                          <p className="text-slate-600 text-sm mb-6 whitespace-pre-line leading-relaxed flex-1">{item.description}</p>
+                          <div className="flex justify-between items-center pt-4 border-t border-slate-200">
+                             <span className="font-serif font-bold text-deli-blue">£{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
+                             <ArrowRight size={16} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
                       ))}
@@ -122,26 +121,26 @@ export const CateringPage = () => {
 
               return (
                 <section key={category} className="max-w-4xl mx-auto">
-                  <div className="text-center mb-12">
+                  <div className="text-center mb-8">
                     <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic underline decoration-deli-mustard/30 underline-offset-8">{category}</h2>
                     {catLower.includes('canap') && (
-                      <p className="text-[10px] font-black uppercase tracking-[0.2em] text-deli-mustard mt-4">Minimum order 12 per item</p>
+                      <p className="text-[9px] font-black uppercase tracking-[0.2em] text-deli-mustard mt-3">Minimum order 12 per item</p>
                     )}
                   </div>
-                  <div className="bg-white rounded-[2rem] border border-slate-100 overflow-hidden shadow-sm">
+                  <div className="bg-white rounded-[1.5rem] border border-slate-100 overflow-hidden shadow-sm">
                     {items.map((item) => (
-                      <div key={item.id} onClick={() => setSelectedItem(item)} className="flex flex-col md:grid md:grid-cols-12 p-8 px-8 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors cursor-pointer group gap-4 md:gap-0">
-                        <div className="md:col-span-7">
-                          <h3 className="font-serif text-lg text-deli-blue group-hover:text-deli-mustard transition-colors">{item.name}</h3>
-                          <p className="text-xs text-slate-500 mt-1 line-clamp-2">{item.description}</p>
+                      <div key={item.id} onClick={() => setSelectedItem(item)} className="flex flex-col md:grid md:grid-cols-12 p-4 md:p-5 px-6 md:px-8 border-b border-slate-50 last:border-0 hover:bg-slate-50 transition-colors cursor-pointer group gap-2 md:gap-0">
+                        <div className="md:col-span-8">
+                          <h3 className="font-serif text-base text-deli-blue group-hover:text-deli-mustard transition-colors">{item.name}</h3>
+                          <p className="text-[11px] text-slate-500 line-clamp-1 italic">{item.description}</p>
                         </div>
                         <div className="flex items-center justify-between md:contents">
-                          <div className="md:col-span-2 text-center font-serif text-lg text-slate-400">
+                          <div className="md:col-span-2 text-center font-serif text-sm text-slate-400">
                             {catLower.includes('platter') ? (item.tags || '10-12') : ''}
                           </div>
-                          <div className="md:col-span-3 text-right">
-                            <p className="font-serif font-bold text-lg text-deli-blue">£{formatPrice(item.price)}</p>
-                            {catLower.includes('canap') && <p className="text-[8px] uppercase font-bold text-slate-400">per item</p>}
+                          <div className="md:col-span-2 text-right">
+                            <p className="font-serif font-bold text-base text-deli-blue">£{formatPrice(item.price)}</p>
+                            {catLower.includes('canap') && <p className="text-[7px] uppercase font-bold text-slate-400 -mt-1">per item</p>}
                           </div>
                         </div>
                       </div>
@@ -154,14 +153,14 @@ export const CateringPage = () => {
         )}
 
         {/* PHOTO GALLERY */}
-        <section className="mt-40 border-t border-slate-100 pt-20">
+        <section className="mt-32 border-t border-slate-100 pt-20">
           <div className="text-center mb-12">
             <span className="text-deli-mustard font-bold uppercase tracking-widest text-[10px]">Gallery</span>
             <h2 className="text-4xl font-serif text-deli-blue italic">Catering Inspiration</h2>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {galleryImages.map((img, i) => (
-              <div key={i} className="aspect-square bg-slate-100 rounded-[2rem] overflow-hidden group relative shadow-sm hover:shadow-xl transition-all duration-500">
+              <div key={i} className="aspect-square bg-slate-100 rounded-[1.5rem] overflow-hidden group relative shadow-sm hover:shadow-xl transition-all duration-500">
                 <img src={img} alt="Catering" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-deli-blue/10 opacity-0 group-hover:opacity-100 transition-opacity" />
               </div>
@@ -213,7 +212,7 @@ export const CateringPage = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                       <input 
                         required 
-                        type="email" // Forces email keyboard and @ validation
+                        type="email"
                         placeholder="Email Address" 
                         className="w-full bg-slate-50 border-0 rounded-2xl p-4 text-sm focus:ring-2 focus:ring-deli-mustard" 
                         onChange={e => setFormData({...formData, emailaddress: e.target.value})} 

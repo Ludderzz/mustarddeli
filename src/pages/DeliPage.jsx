@@ -23,6 +23,13 @@ export const DeliPage = () => {
     setLoading(false);
   };
 
+  // Helper to ensure £ sign is present
+  const renderPrice = (price) => {
+    if (!price) return '';
+    const cleanPrice = price.toString().replace('£', '').trim();
+    return `£${cleanPrice}`;
+  };
+
   return (
     <div className="pt-6 md:pt-10 pb-24 min-h-screen bg-white relative font-sans text-slate-900">
       
@@ -33,18 +40,21 @@ export const DeliPage = () => {
           <span className="text-deli-mustard font-bold uppercase tracking-[0.3em] text-[9px] md:text-[10px]">Artisanal Larder</span>
           <div className="h-px w-6 md:w-8 bg-deli-mustard" />
         </div>
-        <h1 className="text-4xl md:text-8xl font-serif italic mb-4 leading-tight text-deli-blue">
-          Deli <span className="text-slate-900 not-italic font-bold">&</span> <span className="text-deli-mustard">Retail</span>
+        
+        {/* Updated Heading: Blue, Bold, No Italics, Yellow Ampersand */}
+        <h1 className="text-4xl md:text-8xl font-serif font-bold mb-4 leading-tight text-deli-blue uppercase tracking-tight">
+          Deli <span className="text-deli-mustard">&</span> Retail
         </h1>
+        
         <p className="mt-4 text-slate-400 font-light italic max-w-xl mx-auto text-sm md:text-lg px-4">
           Hand-selected local cheeses, cured meats, and pantry essentials.
         </p>
       </header>
 
-      {/* 2. PROVISION LIST */}
+      {/* 2. TAKEAWAY MENU SECTION */}
       <main className="container mx-auto px-4 md:px-6 max-w-4xl">
         <div className="text-center mb-10 md:mb-16">
-            <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic underline decoration-deli-mustard/30 underline-offset-8">Shop Provisions</h2>
+            <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic underline decoration-deli-mustard/30 underline-offset-8">Takeaway Menu</h2>
         </div>
 
         {loading ? (
@@ -79,7 +89,7 @@ export const DeliPage = () => {
                     <div className="md:hidden text-[10px] text-deli-mustard font-bold uppercase tracking-widest">View Detail</div>
                     <div className="flex items-center gap-4">
                         <p className="font-serif font-bold text-xl text-deli-blue">
-                            {item.is_deal ? item.deal_price : item.price}
+                            {renderPrice(item.is_deal ? item.deal_price : item.price)}
                         </p>
                         <ArrowRight size={18} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                     </div>
@@ -123,7 +133,7 @@ export const DeliPage = () => {
                 <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-slate-100 gap-6">
                   <div className="text-center md:text-left">
                     <p className="text-4xl font-serif text-deli-blue font-bold">
-                        {selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price}
+                        {renderPrice(selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price)}
                     </p>
                     {selectedItem.is_deal && <span className="text-deli-mustard font-bold text-[10px] uppercase tracking-widest">Artisan's Choice</span>}
                   </div>
