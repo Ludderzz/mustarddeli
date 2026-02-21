@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import { X, MapPin, ArrowRight, Camera, Sparkles } from 'lucide-react';
+import { X, MapPin, ArrowRight, Sparkles, Store, CookingPot } from 'lucide-react';
 
 export const DeliPage = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
+  const [activeTab, setActiveTab] = useState('larder'); // 'larder' or 'bread'
   
-  // New state for bottom section
-  const [bottomInfo, setBottomInfo] = useState({ content: '', image_urls: [] });
+  // State for bottom section - matches your Admin fields
+  const [bottomInfo, setBottomInfo] = useState({ 
+    content: '', 
+    image_urls: [], 
+    bread_content: '', 
+    bread_image_urls: [] 
+  });
 
   useEffect(() => {
-    fetchDeliItems();
-    fetchBottomInfo();
+    fetchAllData();
   }, []);
 
-  const fetchDeliItems = async () => {
+  // SPEED OPTIMIZATION: Fetch everything in parallel
+  const fetchAllData = async () => {
     setLoading(true);
-    const { data, error } = await supabase
-      .from('menu_items')
-      .select('*')
-      .eq('section', 'deli') 
-      .order('created_at', { ascending: false });
+    const [menuRes, infoRes] = await Promise.all([
+      supabase.from('menu_items').select('*').eq('section', 'deli').order('created_at', { ascending: false }),
+      supabase.from('deli_bottom_info').select('*').single()
+    ]);
 
-    if (!error) setItems(data);
+    if (!menuRes.error) setItems(menuRes.data);
+    if (!infoRes.error && infoRes.data) setBottomInfo(infoRes.data);
     setLoading(false);
-  };
-
-  const fetchBottomInfo = async () => {
-    const { data } = await supabase
-      .from('deli_bottom_info')
-      .select('*')
-      .single();
-    if (data) setBottomInfo(data);
   };
 
   const renderPrice = (price) => {
@@ -61,7 +59,7 @@ export const DeliPage = () => {
         </p>
       </header>
 
-      {/* 2. TAKEAWAY MENU SECTION */}
+      {/* 2. TAKEAWAY MENU SECTION (UNTOUCHED) */}
       <main className="container mx-auto px-4 md:px-6 max-w-4xl">
         <div className="text-center mb-10 md:mb-16">
             <h2 className="text-2xl md:text-3xl font-serif text-deli-blue italic underline decoration-deli-mustard/30 underline-offset-8">Takeaway Menu</h2>
@@ -99,40 +97,55 @@ export const DeliPage = () => {
           </div>
         )}
 
-        {/* 3. UPDATED BOTTOM INFO & GALLERY SECTION */}
+        {/* 3. UPDATED BOTTOM INFO WITH TABS */}
         <section className="mt-20 md:mt-32 border-t border-slate-100 pt-16">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-4">
+          <div className="max-w-2xl mx-auto text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-6">
               <Sparkles size={14} className="text-deli-mustard" />
               <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">The Mustard Deli</span>
             </div>
-            <p className="text-lg md:text-xl font-serif italic text-slate-600 leading-relaxed px-4">
-              {bottomInfo.content || "Visit us in-store to browse our full artisanal selection."}
+            
+            {/* TAB SELECTOR */}
+            <div className="flex bg-slate-50 p-1 rounded-2xl mb-10 max-w-xs mx-auto border border-slate-100">
+              <button 
+                onClick={() => setActiveTab('larder')}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'larder' ? 'bg-white text-deli-blue shadow-sm' : 'text-slate-400'}`}
+              >
+                <CookingPot size={14} /> Deli
+              </button>
+              <button 
+                onClick={() => setActiveTab('bread')}
+                className={`flex-1 flex items-center justify-center gap-2 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === 'bread' ? 'bg-white text-deli-blue shadow-sm' : 'text-slate-400'}`}
+              >
+                <Store size={14} /> Artisan Bread
+              </button>
+            </div>
+
+            <p className="text-lg md:text-xl font-serif italic text-slate-600 leading-relaxed px-4 animate-in fade-in duration-500">
+              {activeTab === 'larder' ? bottomInfo.content : bottomInfo.bread_content}
             </p>
           </div>
 
-          {/* UPDATED GALLERY GRID: grid-cols-2 on mobile ensures all 6 images fit neatly */}
-          {bottomInfo.image_urls?.length > 0 && (
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mt-12 px-2 md:px-0">
-              {bottomInfo.image_urls.map((url, index) => (
-                <div 
-                  key={index} 
-                  className="aspect-[4/5] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-shadow duration-500 group border border-slate-100 bg-slate-50"
-                >
-                  <img 
-                    src={url} 
-                    alt={`Deli gallery ${index}`} 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          )}
+          {/* DYNAMIC GALLERY BASED ON TAB */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 mt-12 px-2 md:px-0">
+            {(activeTab === 'larder' ? bottomInfo.image_urls : bottomInfo.bread_image_urls)?.map((url, index) => (
+              <div 
+                key={`${activeTab}-${index}`} 
+                className="aspect-[4/5] rounded-[1.5rem] md:rounded-[2rem] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 group border border-slate-100 bg-slate-50 animate-in fade-in zoom-in-95"
+              >
+                <img 
+                  src={url} 
+                  alt={`Deli ${activeTab} gallery ${index}`} 
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </section>
       </main>
 
-      {/* 4. PRODUCT DETAIL MODAL */}
+      {/* 4. PRODUCT DETAIL MODAL (UNTOUCHED) */}
       {selectedItem && (
         <div className="fixed inset-0 z-[200] flex items-end md:items-center justify-center p-0 md:p-4">
           <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={() => setSelectedItem(null)} />
@@ -156,7 +169,7 @@ export const DeliPage = () => {
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-slate-100 gap-6">
                   <div className="text-center md:text-left">
-                    <p className="text-4xl font-serif text-deli-blue font-bold">{renderPrice(selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price)}</p>
+                    <p className="text-4xl font-serif text-deli-blue font-bold">{renderPrice(selectedItem.is_deal ? selectedItem.deal_price : item.price)}</p>
                   </div>
                   <button onClick={() => setSelectedItem(null)} className="w-full md:w-auto px-10 py-4 bg-deli-blue text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-deli-mustard transition-all shadow-lg">
                     Close details
