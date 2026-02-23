@@ -20,7 +20,7 @@ const ContactModal = ({ isOpen, onClose }) => {
 
   const handleWhatsAppRedirect = (e) => {
     e.preventDefault();
-    const phone = "447000000000"; // REPLACE WITH YOUR WHATSAPP NUMBER
+    const phone = "447900462806"; // REPLACE WITH YOUR WHATSAPP NUMBER
     const text = `Hi Mustard! I'm ${formData.name}. ${formData.message}`;
     window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
     onClose();
