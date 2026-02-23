@@ -46,7 +46,7 @@ export const InfoSection = () => {
                   </p>
                   {/* Mobile Quick Link */}
                   <a 
-                    href="https://goo.gl/maps/YOUR_LINK_HERE" 
+                    href="https://maps.app.goo.gl/Yjv2wjmWo5Qna53L6" 
                     target="_blank" 
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 text-deli-mustard font-bold text-[10px] uppercase tracking-wider mt-3 hover:underline"
