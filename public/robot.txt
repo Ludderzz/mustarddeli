@@ -1,0 +1,12 @@
+# Created & Managed by WebCircuitUk for mustardcafe.com
+# Focused on North Somerset Local Search Optimization
+
+User-agent: *
+Allow: /
+Allow: /cafe
+Allow: /deli
+Allow: /catering
+Allow: /gallery
+
+# Telling Google where the map of the site is
+Sitemap: https://mustardcafe.com/sitemap.xml

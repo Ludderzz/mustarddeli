@@ -10,8 +10,8 @@ export const InfoSection = () => {
   ];
 
   const socials = [
-    { icon: <Instagram size={20} />, link: '#', label: 'Instagram' },
-    { icon: <Facebook size={20} />, link: '#', label: 'Facebook' },
+    { icon: <Instagram size={20} />, link: 'https://www.instagram.com/mustardcafedeli/', label: 'Instagram' },
+    { icon: <Facebook size={20} />, link: 'https://www.facebook.com/profile.php?id=100083152282277', label: 'Facebook' },
   ];
 
   return (
