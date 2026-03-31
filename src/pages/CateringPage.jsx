@@ -71,8 +71,10 @@ export const CateringPage = () => {
   };
 
   const formatPrice = (price) => {
-    if (!price) return null;
-    return parseFloat(price.toString().replace('£', '').trim());
+    if (!price) return '';
+    // Returns formatted string with £ symbol
+    const cleanPrice = price.toString().replace('£', '').trim();
+    return `£${cleanPrice}`;
   };
 
   return (
@@ -109,7 +111,8 @@ export const CateringPage = () => {
                           <h3 className="text-xl font-serif text-deli-blue mb-3">{item.name}</h3>
                           <p className="text-slate-600 text-sm mb-6 whitespace-pre-line leading-relaxed flex-1">{item.description}</p>
                           <div className="flex justify-between items-center pt-4 border-t border-slate-200">
-                             <span className="font-serif font-bold text-deli-blue">£{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
+                             {/* UPDATED: Price color changed to text-deli-blue */}
+                             <span className="font-serif font-bold text-deli-blue">{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
                              <ArrowRight size={16} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                           </div>
                         </div>
@@ -139,7 +142,8 @@ export const CateringPage = () => {
                             {catLower.includes('platter') ? (item.tags || '10-12') : ''}
                           </div>
                           <div className="md:col-span-2 text-right">
-                            <p className="font-serif font-bold text-base text-deli-blue">£{formatPrice(item.price)}</p>
+                            {/* UPDATED: Price color changed to text-deli-blue */}
+                            <p className="font-serif font-bold text-base text-deli-blue whitespace-nowrap">{formatPrice(item.price)}</p>
                             {catLower.includes('canap') && <p className="text-[7px] uppercase font-bold text-slate-400 -mt-1">per item</p>}
                           </div>
                         </div>

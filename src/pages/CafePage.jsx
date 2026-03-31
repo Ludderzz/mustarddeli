@@ -15,7 +15,6 @@ export const CafePage = () => {
   const [loading, setLoading] = useState(true);
   const [selectedItem, setSelectedItem] = useState(null);
 
-  // Updated to 6 images (added food1 and food2 again as placeholders)
   const galleryImages = [food1, food2, food3, food4, food5, food6];
 
   useEffect(() => {
@@ -63,7 +62,6 @@ export const CafePage = () => {
           <span className="text-deli-mustard">The</span> <span className="text-deli-blue not-italic font-bold">Menu</span>
         </h1>
 
-        {/* Updated Gallery: Changed max-w-md to max-w-4xl and grid-cols-4 to grid-cols-3/md:grid-cols-6 */}
         <div className="grid grid-cols-3 md:grid-cols-6 gap-3 max-w-4xl mx-auto px-4">
           {galleryImages.map((img, index) => (
             <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-md border-2 border-white transform transition-all hover:scale-105 bg-slate-100">
@@ -119,7 +117,8 @@ export const CafePage = () => {
                             {item.name}
                             {item.is_deal && <Star size={12} className="inline ml-1 text-deli-mustard fill-deli-mustard" />}
                           </h3>
-                          <div className="font-serif text-slate-900 font-bold text-base md:text-lg">
+                          {/* UPDATED: Price color changed to text-deli-blue */}
+                          <div className="font-serif text-deli-blue font-bold text-base md:text-lg whitespace-nowrap">
                             {item.is_deal && item.deal_price ? formatPrice(item.deal_price) : formatPrice(item.price)}
                           </div>
                         </div>

@@ -52,7 +52,6 @@ export const DeliPage = () => {
     return `£${cleanPrice}`;
   };
 
-  // Helper to serve optimized images (Resizes to 600px width on the fly)
   const getOptimizedUrl = (url) => {
     if (!url) return '';
     return url.includes('supabase.co') ? `${url}?width=600&quality=75` : url;
@@ -107,7 +106,8 @@ export const DeliPage = () => {
                 <div className="flex items-center justify-between md:justify-end md:col-span-3 text-right">
                     <div className="md:hidden text-[10px] text-deli-mustard font-bold uppercase tracking-widest">View Detail</div>
                     <div className="flex items-center gap-4">
-                        <p className="font-serif font-bold text-xl text-deli-blue">{renderPrice(item.is_deal ? item.deal_price : item.price)}</p>
+                        {/* UPDATED: Price color changed to text-deli-blue */}
+                        <p className="font-serif font-bold text-xl text-deli-blue whitespace-nowrap">{renderPrice(item.is_deal ? item.deal_price : item.price)}</p>
                         <ArrowRight size={18} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                     </div>
                 </div>
@@ -120,7 +120,6 @@ export const DeliPage = () => {
         <section className="mt-20 md:mt-32 border-t border-slate-100 pt-16">
           <div className="max-w-2xl mx-auto text-center mb-8">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-deli-mustard/10 rounded-full mb-6">
-              <Sparkles size={14} className="text-deli-mustard" />
               <span className="text-[10px] font-black uppercase tracking-widest text-deli-mustard">The Mustard Deli</span>
             </div>
             
@@ -187,6 +186,7 @@ export const DeliPage = () => {
                 </div>
                 <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-slate-100 gap-6">
                   <div className="text-center md:text-left">
+                    {/* UPDATED: Modal price color changed to text-deli-blue */}
                     <p className="text-4xl font-serif text-deli-blue font-bold">{renderPrice(selectedItem.is_deal ? selectedItem.deal_price : selectedItem.price)}</p>
                   </div>
                   <button onClick={() => setSelectedItem(null)} className="w-full md:w-auto px-10 py-4 bg-deli-blue text-white rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-deli-mustard transition-all shadow-lg">
