@@ -46,8 +46,11 @@ export const CateringPage = () => {
     if (!error) {
       const rawCategories = [...new Set(data.map(item => item.category || 'Packages'))];
       const sortedCats = rawCategories.sort((a, b) => {
+        // Keeps Set Menus at the top, followed by Cakes & Sweet Treats
         if (a.toLowerCase().includes('set menu')) return -1;
         if (b.toLowerCase().includes('set menu')) return 1;
+        if (a.toLowerCase().includes('cakes')) return -1;
+        if (b.toLowerCase().includes('cakes')) return 1;
         return 0;
       });
       setMenuItems(data || []);
@@ -72,7 +75,6 @@ export const CateringPage = () => {
 
   const formatPrice = (price) => {
     if (!price) return '';
-    // Returns formatted string with £ symbol
     const cleanPrice = price.toString().replace('£', '').trim();
     return `£${cleanPrice}`;
   };
@@ -101,6 +103,7 @@ export const CateringPage = () => {
               const items = menuItems.filter(item => (item.category || 'Packages') === category);
               const catLower = category.toLowerCase();
 
+              // SET MENU PATTERN
               if (catLower.includes('set menu')) {
                 return (
                   <section key={category}>
@@ -111,7 +114,6 @@ export const CateringPage = () => {
                           <h3 className="text-xl font-serif text-deli-blue mb-3">{item.name}</h3>
                           <p className="text-slate-600 text-sm mb-6 whitespace-pre-line leading-relaxed flex-1">{item.description}</p>
                           <div className="flex justify-between items-center pt-4 border-t border-slate-200">
-                             {/* UPDATED: Price color changed to text-deli-blue */}
                              <span className="font-serif font-bold text-deli-blue">{formatPrice(item.price)} <span className="text-[10px] text-slate-400 font-sans uppercase">pp</span></span>
                              <ArrowRight size={16} className="text-deli-mustard group-hover:translate-x-1 transition-transform" />
                           </div>
@@ -122,6 +124,7 @@ export const CateringPage = () => {
                 );
               }
 
+              // STANDARD PATTERN (Cakes, Platters, Canapes)
               return (
                 <section key={category} className="max-w-4xl mx-auto">
                   <div className="text-center mb-8">
@@ -139,12 +142,13 @@ export const CateringPage = () => {
                         </div>
                         <div className="flex items-center justify-between md:contents">
                           <div className="md:col-span-2 text-center font-serif text-sm text-slate-400">
-                            {catLower.includes('platter') ? (item.tags || '10-12') : ''}
+                            {/* Shows serving size for Cakes or Platters */}
+                            {(catLower.includes('platter') || catLower.includes('cakes')) ? (item.tags || '') : ''}
                           </div>
                           <div className="md:col-span-2 text-right">
-                            {/* UPDATED: Price color changed to text-deli-blue */}
                             <p className="font-serif font-bold text-base text-deli-blue whitespace-nowrap">{formatPrice(item.price)}</p>
                             {catLower.includes('canap') && <p className="text-[7px] uppercase font-bold text-slate-400 -mt-1">per item</p>}
+                            {catLower.includes('cakes') && <p className="text-[7px] uppercase font-bold text-slate-400 -mt-1">per cake</p>}
                           </div>
                         </div>
                       </div>
